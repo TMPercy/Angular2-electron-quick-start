@@ -20,8 +20,9 @@ let tools = {
     },
     px2num: (obj: any) => {
         let result = Object.assign({}, obj);
-        for (let i in result) {
-            for (let j in result[i]) {
+        let positionKey = ['bottomSidePanePosition', 'bottomSideDividerPosition', 'leftSidePanePosition', 'leftSideDividerPosition', 'contentPanePosition']
+        for (let i in positionKey) {
+            for (let j in result[positionKey[i]]) {
                 if (typeof result[i][j] == 'string')
                     result[i][j] = +result[i][j].replace('px', '');
             }
