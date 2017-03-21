@@ -1,8 +1,14 @@
-import { AppState } from './../store/appState.store';
 /**
  * Import decorators and services from angular
  */
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+/**
+ * Import the ngrx configured store
+ */
+import { Store } from '@ngrx/store';
+import { AppState } from '../store';
+
+import { Tools } from '../lib/util';
 
 /*
  * App Component
@@ -15,19 +21,22 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None,
     template: `
     <div>
-        <main>
-            <router-outlet></router-outlet>
-        </main>
+        <eo-preloader type="circles" [show]="appStore.viewContentLoaded"></eo-preloader>
+        <router-outlet></router-outlet>
     </div>
     `
 })
 export class AppComponent implements OnInit {
-    //component initialization
-    isDarkTheme: boolean = false;
 
-    ngOnInit() {
-        //check authentication
+    appStore: any;
+
+    constructor(public store: Store<AppState>) {
     }
 
-    checkAuthentication() { }
+    ngOnInit() {
+        let state = this.store.select('AppStore').subscribe((state: any) => {
+            this.appStore = Tools.transformPositon(state);
+        });
+    }
+
 }

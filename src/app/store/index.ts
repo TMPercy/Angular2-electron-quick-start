@@ -3,5 +3,6 @@ export interface AppState {
     bottomSideDividerPosition: { left: number, bottom: number },
     leftSidePanePosition: { width: number },
     leftSideDividerPosition: { left: number },
-    contentPanePosition: { 'margin-left': number, bottom: number }
+    contentPanePosition: { 'margin-left': number, bottom: number },
+    viewContentLoaded: boolean
 };

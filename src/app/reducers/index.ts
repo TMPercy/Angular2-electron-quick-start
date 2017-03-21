@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-import { ERROR, Layout_H_Change, Layout_V_Change } from '../actions';
+import { ERROR, Layout_H_Change, Layout_V_Change, View_Content_Loadded } from '../actions';
 
 import { Tools } from '../lib/util';
 
@@ -9,7 +9,8 @@ export const InitialState = {
     bottomSideDividerPosition: { left: 288, bottom: 240 },
     leftSidePanePosition: { width: 280 },
     leftSideDividerPosition: { left: 280 },
-    contentPanePosition: { 'margin-left': 280, bottom: 250 }
+    contentPanePosition: { 'margin-left': 280, bottom: 250 },
+    viewContentLoaded: false
 };
 
 const transformLayout = (direction: string, value: number, state: any) => {
@@ -36,7 +37,7 @@ const transformLayout = (direction: string, value: number, state: any) => {
 }
 
 
-export const layoutStore: ActionReducer<Object> = (state: Object = InitialState, action: Action) => {
+export const AppStore: ActionReducer<Object> = (state: Object = InitialState, action: Action) => {
     let transformObject: any;;
     switch (action.type) {
         case ERROR:
@@ -56,7 +57,11 @@ export const layoutStore: ActionReducer<Object> = (state: Object = InitialState,
                 ...state,
                 ...transformLayout
             };
-
+        case View_Content_Loadded:
+            return {
+                ...state,
+                viewContentLoaded: action.payload.value
+            };
         default:
             return state;
     }

@@ -9,7 +9,7 @@ import { Http, Headers } from '@angular/http';
  * Import the ngrx configured store
  */
 import { Store } from '@ngrx/store';
-import { AppState } from './../store/appState.store';
+import { AppState } from './../store';
 
 import { ERROR, Layout_H_Change, Layout_V_Change } from '../actions';
 

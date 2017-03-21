@@ -1,14 +1,14 @@
 <div class="eo-home" (mousemove)="onDragPaneMouseMove($event)" (mouseup)="onDragPaneMouseUp($event)">
     <eo-navbar></eo-navbar>
     <div class="eo-home-container">
-        <eo-drag-pane [direction]="'h'" (dragPaneHResize)="onDragPaneResize($event)" [customerPosition]="layoutData.leftSideDividerPosition">
+        <eo-drag-pane [direction]="'h'" (dragPaneHResize)="onDragPaneResize($event)" [customerPosition]="appStore.leftSideDividerPosition">
             <section>
-                <div class="eo-left-content" [ngStyle]="layoutData.leftSidePanePosition">
+                <div class="eo-left-content" [ngStyle]="appStore.leftSidePanePosition">
 
                 </div>
             </section>
         </eo-drag-pane>
-        <div class="eo-right-content" [ngStyle]="layoutData.contentPanePosition">
+        <div class="eo-right-content" [ngStyle]="appStore.contentPanePosition">
 
             <!--request-pane-->
 
@@ -118,9 +118,9 @@
             </eo-response-pane>
 
         </div>
-        <eo-drag-pane [direction]="'v'" (dragPaneVResize)="onDragPaneResize($event)" [customerPosition]="layoutData.bottomSideDividerPosition">
+        <eo-drag-pane [direction]="'v'" (dragPaneVResize)="onDragPaneResize($event)" [customerPosition]="appStore.bottomSideDividerPosition">
             <section>
-                <div class="eo-pane" [ngStyle]="layoutData.bottomSidePanePosition">
+                <div class="eo-pane" [ngStyle]="appStore.bottomSidePanePosition">
                     Some Operation Tips!
                 </div>
             </section>

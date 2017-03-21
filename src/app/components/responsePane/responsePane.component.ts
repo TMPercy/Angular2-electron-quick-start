@@ -6,7 +6,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
  * Import the ngrx configured store
  */
 import { Store } from '@ngrx/store';
-import { AppState } from '../../store/appState.store';
+import { AppState } from '../../store';
 
 
 // Allow us to use Notification API here.

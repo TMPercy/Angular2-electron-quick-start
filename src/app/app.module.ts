@@ -12,13 +12,14 @@ import { HttpModule } from '@angular/http';
 
 // Setup redux with ngrx
 import { Store, StoreModule } from '@ngrx/store';
-import { layoutStore, InitialState } from './reducers';
+import { AppStore, InitialState } from './reducers';
 
 /**
  * Import our ui components
  */
 import { ActionButtonComponent } from './ui-components/action-button/action-button.component'
 import { DragPaneComponent } from './ui-components/drag-pane/drag-pane.component'
+import { PreloaderComponent } from './ui-components/preloader/preloader.component'
 /**
  * Import our child components
  */
@@ -34,6 +35,7 @@ import { AppComponent } from './components/app.component';
  *  Import our providers
  */
 import { LayoutService } from './services/layout.service';
+import { LoadService } from './services/loader.service';
 
 /**
  * Import material UI Components
@@ -58,15 +60,16 @@ import { routes } from './app.routes';
         // MaterialModule.forRoot(),
         RouterModule.forRoot(routes, { useHash: true }),
         StoreModule.provideStore({
-            layoutStore
+            AppStore
         }),
         StoreDevtoolsModule.instrumentOnlyWithExtension()
     ],
-    providers: [LayoutService],
+    providers: [LayoutService, LoadService],
     declarations: [
         //ui-components
         ActionButtonComponent,
         DragPaneComponent,
+        PreloaderComponent,
         //custom-components
         AppComponent,
         HomeComponent,

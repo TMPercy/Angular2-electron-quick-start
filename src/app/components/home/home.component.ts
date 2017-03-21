@@ -8,12 +8,13 @@ import { FormControl, FormGroup } from '@angular/forms';
  * Import the ngrx configured store
  */
 import { Store } from '@ngrx/store';
-import { AppState } from '../../store/appState.store';
+import { AppState } from '../../store';
 
 
 import { ActionItem } from '../../ui-components/action-button/action-item.model';
 
 import { LayoutService } from '../../services/layout.service';
+import { LoadService } from '../../services/loader.service';
 import { Tools } from '../../lib/util';
 
 // Allow us to use Notification API here.
@@ -25,7 +26,7 @@ interface dragData {
 }
 
 @Component({
-    selector: 'ae-home',
+    selector: 'eo-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })
@@ -68,17 +69,23 @@ export class HomeComponent implements OnInit {
     draggingDiff: number;
     draggingDirection: string;
     //layout data
-    layoutData: any;
+    appStore: any;
 
-    constructor(public store: Store<AppState>, private layout: LayoutService) {
+    constructor(public store: Store<AppState>, private layout: LayoutService, private loader: LoadService) {
         this.layout = layout;
+        this.loader = loader;
     }
 
     ngOnInit() {
-        let state = this.store.select('layoutStore').subscribe((state: any) => {
-            this.layoutData = Tools.transformPositon(state);
+        let state = this.store.select('AppStore').subscribe((state: any) => {
+            this.appStore = Tools.transformPositon(state);
             // this.ref.detectChanges();
         });
+    }
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.loader.setAppReady();
+        }, 1000)
     }
 
     onMethodClick(item: ActionItem) {
@@ -88,7 +95,6 @@ export class HomeComponent implements OnInit {
         this.defaultProtocol = item;
     }
     onDragPaneResize(data: dragData) {
-        console.log(data)
         this.draggingSign = true;
         this.draggingDiff = data.diff;
         this.draggingDirection = data.direction;
@@ -125,8 +131,5 @@ export class HomeComponent implements OnInit {
         $event.preventDefault();
         this.draggingSign = false;
     }
-    // clearSlct() {
-    //     "getSelection" in window ? window.getSelection().removeAllRanges() : document.selection.empty();
-    // }
 
 }

@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Setup redux with ngrx
 import { Store, StoreModule } from '@ngrx/store';
 import { LayoutService } from '../../services/layout.service';
-import { layoutStore, InitialState } from '../../reducers';
+import { AppStore, InitialState } from '../../reducers';
 
 
 describe('App component', () => {
@@ -14,7 +14,7 @@ describe('App component', () => {
         imports: [
             FormsModule,
             ReactiveFormsModule,
-            StoreModule.provideStore({ layoutStore }),
+            StoreModule.provideStore({ AppStore }),
         ],
         providers: [
             LayoutService,
