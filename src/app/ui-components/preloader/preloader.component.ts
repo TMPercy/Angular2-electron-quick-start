@@ -16,7 +16,6 @@ export class PreloaderComponent {
     timer: any = null;
     constructor(el: ElementRef) {
         //    el.nativeElement.style.backgroundColor = 'yellow';
-        console.log(el.nativeElement.innerText, el.nativeElement.innerHTML)
     }
     ngOnInit() {
         this.timer = setInterval(() => {

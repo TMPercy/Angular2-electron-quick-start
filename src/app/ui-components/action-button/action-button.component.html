@@ -1,11 +1,9 @@
 <div class="btn-group {{direction? 'drop' + direction : '' }} {{cssClass}}" [ngClass]="{open: isOpen}">
-    <button [ngStyle]="customerStyle" class="btn {{type? 'btn-' + type : ''}} {{btnSize? 'btn-' + btnSize : ''}}" (click)="toggle($event)"
-        [disabled]="disabled">
+    <button [ngStyle]="customerStyle" class="btn {{type? 'btn-' + type : ''}} {{btnSize? 'btn-' + btnSize : ''}}" (click)="buttonToggle($event)" [disabled]="disabled">
     <i *ngIf="icon" class="{{icon}}" aria-hidden="true"></i>
     {{buttonText}}
   </button>
-    <button type="button" class="btn {{type? 'btn-' + type : ''}} {{btnSize? 'btn-' + btnSize : ''}} dropdown-toggle" aria-haspopup="true"
-        [attr.aria-expanded]="true" (click)="toggle($event)" [disabled]="disabled">
+    <button type="button" class="btn {{type? 'btn-' + type : ''}} {{btnSize? 'btn-' + btnSize : ''}} dropdown-toggle" aria-haspopup="true" [attr.aria-expanded]="true" (click)="toggle($event)" [disabled]="disabled">
     <span class="caret"></span>
     <span class="sr-only">|</span>
   </button>

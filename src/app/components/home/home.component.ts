@@ -133,4 +133,12 @@ export class HomeComponent implements OnInit {
         this.draggingSign = false;
     }
 
+    onProtocolEmit(protocol?: string) {
+        console.log(protocol)
+        if (protocol) {
+            let p = protocol.toUpperCase();
+
+            this.defaultProtocol = p == 'HTTP' ? this.protocols[0] : this.protocols[1];
+        }
+    }
 }

@@ -16,29 +16,21 @@
                 <div class="service form-horizontal">
                     <div class="row">
                         <span class="cell protocol"> 
-                <eo-action-button [customerStyle]="{'min-width':'80px','text-align':'left'}" [buttonText]="defaultProtocol.text" type="default" [actions]="protocols" (actionClick)="onProtocolClick($event)"></eo-action-button>
-              </span>
+                            <eo-action-button [customerStyle]="{'min-width':'80px','text-align':'left'}" [buttonText]="defaultProtocol.text" type="default" [actions]="protocols" (actionClick)="onProtocolClick($event)"></eo-action-button>
+                        </span>
                         <span class="cell"> :// </span>
                         <span class="cell-url"> 
-              <span class="expression-input input-append">
-                <input type="text" class="form-control" placeholder="type an URI">
-                <span class="add-on" title="Expression builder"><i class="icon-magic"></i>
-                </span>
-                        </span>
+                            <eo-url-input (protocolEmit)='onProtocolEmit($event)'></eo-url-input>
                         </span>
                         <span class="cell"> 
-                <a href="javascript:;" class="btn-link" title="Open Query Editor">
-                  ? [0] </a> 
-              </span>
+                            <a href="javascript:;" class="btn-link" title="Open Query Editor">? [0] </a> 
+                        </span>
                         <span class="cell http-method">
-              <eo-action-button [customerStyle]="{'min-width':'100px','text-align':'left'}" [buttonText]="defaultMethod.text" type="default" [actions]="methods" (actionClick)="onMethodClick($event)"></eo-action-button>
-                
-        </span>
+                            <eo-action-button [customerStyle]="{'min-width':'100px','text-align':'left'}" [buttonText]="defaultMethod.text" type="default" [actions]="methods" (actionClick)="onMethodClick($event)"></eo-action-button>
+                        </span>
                         <span class="cell send-button"> 
-                <eo-action-button [customerStyle]="{'min-width':'60px','text-align':'left'}" [buttonText]="'Send'" [actions]="[]" icon="glyphicon glyphicon-send"
-                    [type]="'primary'"
-    ></eo-action-button>
-              </span>
+                            <eo-action-button [buttonAction]=true [customerStyle]="{'min-width':'60px','text-align':'left'}" [buttonText]="'Send'" [actions]="[]" icon="glyphicon glyphicon-send" [type]="'primary'"></eo-action-button>
+                        </span>
                     </div>
                 </div>
                 <!--request data body-->

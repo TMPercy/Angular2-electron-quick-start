@@ -17,9 +17,10 @@ import { AppStore, InitialState } from './reducers';
 /**
  * Import our ui components
  */
-import { ActionButtonComponent } from './ui-components/action-button/action-button.component'
-import { DragPaneComponent } from './ui-components/drag-pane/drag-pane.component'
-import { PreloaderComponent } from './ui-components/preloader/preloader.component'
+import { ActionButtonComponent } from './ui-components/action-button/action-button.component';
+import { DragPaneComponent } from './ui-components/drag-pane/drag-pane.component';
+import { PreloaderComponent } from './ui-components/preloader/preloader.component';
+import { UrlInputComponent } from './ui-components/url-input/url-input.component';
 /**
  * Import our child components
  */
@@ -70,6 +71,7 @@ import { routes } from './app.routes';
         ActionButtonComponent,
         DragPaneComponent,
         PreloaderComponent,
+        UrlInputComponent,
         //custom-components
         AppComponent,
         HomeComponent,
