@@ -83,6 +83,7 @@ export class HomeComponent implements OnInit {
         });
     }
     ngAfterViewInit() {
+        //when app is ready,remove loading
         setTimeout(() => {
             this.loader.setAppReady();
         }, 1000)

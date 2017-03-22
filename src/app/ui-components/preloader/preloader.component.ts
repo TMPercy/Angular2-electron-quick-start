@@ -19,7 +19,6 @@ export class PreloaderComponent {
         console.log(el.nativeElement.innerText, el.nativeElement.innerHTML)
     }
     ngOnInit() {
-        console.log(this.show)
         this.timer = setInterval(() => {
             let len = this.loadinText.length;
             if (len > 7) {
