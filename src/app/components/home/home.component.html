@@ -20,7 +20,7 @@
                         </span>
                         <span class="cell"> :// </span>
                         <span class="cell-url"> 
-                            <eo-url-input (protocolEmit)='onProtocolEmit($event)'></eo-url-input>
+                            <eo-url-input (urlChange)='onUrlChange($event)' (enableSend)='onEnableSend($event)' (protocolEmit)='onProtocolEmit($event)' [defaultValue]=""></eo-url-input>
                         </span>
                         <span class="cell"> 
                             <a href="javascript:;" class="btn-link" title="Open Query Editor">? [0] </a> 
@@ -29,7 +29,7 @@
                             <eo-action-button [customerStyle]="{'min-width':'100px','text-align':'left'}" [buttonText]="defaultMethod.text" type="default" [actions]="methods" (actionClick)="onMethodClick($event)"></eo-action-button>
                         </span>
                         <span class="cell send-button"> 
-                            <eo-action-button [buttonAction]=true [customerStyle]="{'min-width':'60px','text-align':'left'}" [buttonText]="'Send'" [actions]="[]" icon="glyphicon glyphicon-send" [type]="'primary'"></eo-action-button>
+                            <eo-action-button (buttonClick)='onSendingRequest($event)' [disabled]='!enableSend' [buttonAction]=true [customerStyle]="{'min-width':'60px','text-align':'left'}" [buttonText]="'Send'" [actions]="[]" icon="glyphicon glyphicon-send" [type]="'primary'"></eo-action-button>
                         </span>
                     </div>
                 </div>
@@ -100,22 +100,19 @@
 
                     </div>
 
-                    <div class="body">
-                        <div class="sub-label"> <a href="http://tools.ietf.org/html/rfc7230#section-3.3" target="_blank">Body</a> </div>
-                        <div class="response-body">
-                            <div class="unknown">No Content</div>
-                        </div>
-                    </div>
+                    <eo-response-body></eo-response-body>
                 </div>
             </eo-response-pane>
 
         </div>
-        <eo-drag-pane [direction]="'v'" (dragPaneVResize)="onDragPaneResize($event)" [customerPosition]="appStore.bottomSideDividerPosition">
+
+        <!--bottom drag pane-->
+        <!--<eo-drag-pane [direction]="'v'" (dragPaneVResize)="onDragPaneResize($event)" [customerPosition]="appStore.bottomSideDividerPosition">
             <section>
                 <div class="eo-pane" [ngStyle]="appStore.bottomSidePanePosition">
                     Some Operation Tips!
                 </div>
             </section>
-        </eo-drag-pane>
+        </eo-drag-pane>-->
     </div>
 </div>

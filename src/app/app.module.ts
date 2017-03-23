@@ -26,10 +26,12 @@ import { UrlInputComponent } from './ui-components/url-input/url-input.component
  */
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { RequestBodyComponent } from './components/requestBody/requestBody.component';
-import { RequestHeaderComponent } from './components/requestHeader/requestHeader.component';
-import { RequestPaneComponent } from './components/requestPane/requestPane.component';
-import { ResponsePaneComponent } from './components/responsePane/responsePane.component';
+import { RequestBodyComponent } from './components/request-body/request-body.component';
+import { RequestHeaderComponent } from './components/request-header/request-header.component';
+import { RequestPaneComponent } from './components/request-pane/request-pane.component';
+import { ResponsePaneComponent } from './components/response-pane/response-pane.component';
+import { ResponseBodyComponent } from './components/response-body/response-body.component';
+// // import { ResponseHeaderComponent } from './components/response-header/response-header.component';
 import { AppComponent } from './components/app.component';
 
 /**
@@ -37,6 +39,7 @@ import { AppComponent } from './components/app.component';
  */
 import { LayoutService } from './services/layout.service';
 import { LoadService } from './services/loader.service';
+import { RequestService } from './services/request.service';
 
 /**
  * Import material UI Components
@@ -65,7 +68,7 @@ import { routes } from './app.routes';
         }),
         StoreDevtoolsModule.instrumentOnlyWithExtension()
     ],
-    providers: [LayoutService, LoadService],
+    providers: [LayoutService, LoadService, RequestService],
     declarations: [
         //ui-components
         ActionButtonComponent,
@@ -79,7 +82,8 @@ import { routes } from './app.routes';
         RequestHeaderComponent,
         RequestBodyComponent,
         RequestPaneComponent,
-        ResponsePaneComponent
+        ResponsePaneComponent,
+        ResponseBodyComponent
     ],
     bootstrap: [AppComponent]
 })

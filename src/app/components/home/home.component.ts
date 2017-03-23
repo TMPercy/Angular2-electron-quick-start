@@ -4,6 +4,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { RequestMethod, Headers } from '@angular/http';
+
 /**
  * Import the ngrx configured store
  */
@@ -15,6 +17,7 @@ import { ActionItem } from '../../ui-components/action-button/action-item.model'
 
 import { LayoutService } from '../../services/layout.service';
 import { LoadService } from '../../services/loader.service';
+import { RequestService } from '../../services/request.service';
 import { Tools } from '../../lib/util';
 
 // Allow us to use Notification API here.
@@ -31,26 +34,32 @@ interface dragData {
     styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+    constructor(public store: Store<AppState>, private layout: LayoutService, private loader: LoadService, private res: RequestService) {
+        this.layout = layout;
+        this.loader = loader;
+        this.res = res;
+    }
+
     name: string;
     defaultMethod: ActionItem = { id: 0, text: 'GET' }
     methods: ActionItem[] = [
         {
-            id: 0,
+            id: RequestMethod.Get,
             text: 'GET',
         }, {
-            id: 1,
+            id: RequestMethod.Post,
             text: 'POST',
         }, {
-            id: 2,
+            id: RequestMethod.Put,
             text: 'PUT',
         }, {
-            id: 3,
+            id: RequestMethod.Delete,
             text: 'DELETE',
         }, {
-            id: 4,
+            id: RequestMethod.Head,
             text: 'HEAD',
         }, {
-            id: 5,
+            id: RequestMethod.Options,
             text: 'OPTIONS',
         }];
     defaultProtocol: ActionItem = { id: 0, text: 'HTTP' };
@@ -60,7 +69,10 @@ export class HomeComponent implements OnInit {
     }, {
         id: 1,
         text: 'HTTPS',
-    }]
+    }];
+    url: string = '123456';
+
+
     messageForm = new FormGroup({
         messageText: new FormControl('Angular2'),
     });
@@ -71,10 +83,10 @@ export class HomeComponent implements OnInit {
     //layout data
     appStore: any;
 
-    constructor(public store: Store<AppState>, private layout: LayoutService, private loader: LoadService) {
-        this.layout = layout;
-        this.loader = loader;
-    }
+    //enable send request
+    enableSend: boolean = false;
+
+
 
     ngOnInit() {
         let state = this.store.select('AppStore').subscribe((state: any) => {
@@ -134,11 +146,37 @@ export class HomeComponent implements OnInit {
     }
 
     onProtocolEmit(protocol?: string) {
-        console.log(protocol)
         if (protocol) {
             let p = protocol.toUpperCase();
 
             this.defaultProtocol = p == 'HTTP' ? this.protocols[0] : this.protocols[1];
         }
+    }
+
+    onEnableSend(sign?: boolean) {
+        this.enableSend = sign;
+    }
+    onUrlChange(url?: string) {
+        console.log(url)
+        if (url) {
+            this.url = url;
+        }
+    }
+    onSendingRequest() {
+        let headers = new Headers();
+        headers.append('Accept', 'application/json');
+        console.log(this.url, typeof (this.url))
+        let url = this.defaultProtocol.text.toLocaleLowerCase() + '://' + this.url;
+        let method = this.defaultMethod.id;
+        let data = "";
+        console.log(url)
+        this.res.request(method, url, headers, data).subscribe(
+            response => {
+                //call the store to update the authToken
+                console.log(response)
+            },
+            err => console.log(err),
+            () => console.log('Authentication Complete')
+        )
     }
 }

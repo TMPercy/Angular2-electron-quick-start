@@ -14,8 +14,8 @@ declare var Notification: any;
 
 @Component({
     selector: 'eo-response-pane',
-    templateUrl: './responsePane.component.html',
-    styleUrls: ['./responsePane.component.scss'],
+    templateUrl: './response-pane.component.html',
+    styleUrls: ['./response-pane.component.scss'],
     encapsulation: ViewEncapsulation.None
 
 })

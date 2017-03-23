@@ -105,23 +105,6 @@
                     .response-status-line-error {
                         background-color: #e45e62;
                     }
-                    .response-body {
-                        font-size: 14px;
-                        padding: 5px;
-                        min-height: 70px;
-                        white-space: pre-wrap;
-                        line-height: 1.4em;
-                        width: 100%;
-                        .unknown {
-                            padding: 30px 50px 20px 50px;
-                            font-size: 40px;
-                            font-weight: 900;
-                            text-transform: uppercase;
-                            color: #fff;
-                            text-shadow: #aaa 0 0 80px;
-                            font-family: sans-serif, arial;
-                        }
-                    }
                     .h-container {
                         .headers {
                             width: 400px;

@@ -13,11 +13,11 @@ import { AppState } from '../../store';
 declare var Notification: any;
 
 @Component({
-    selector: 'eo-request-header',
-    templateUrl: './requestHeader.component.html',
-    styleUrls: ['./requestHeader.component.scss'],
+    selector: 'eo-response-body',
+    templateUrl: './response-body.component.html',
+    styleUrls: ['./response-body.component.scss'],
 })
-export class RequestHeaderComponent implements OnInit {
+export class ResponseBodyComponent implements OnInit {
     name: string;
 
     constructor(public store: Store<AppState>) { }

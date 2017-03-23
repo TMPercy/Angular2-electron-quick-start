@@ -5,11 +5,11 @@ import { ERROR, Layout_H_Change, Layout_V_Change, View_Content_Loadded } from '.
 import { Tools } from '../lib/util';
 
 export const InitialState = {
-    bottomSidePanePosition: { left: 288, height: 240 },
-    bottomSideDividerPosition: { left: 288, bottom: 240 },
+    // bottomSidePanePosition: { left: 288, height: 240 },
+    // bottomSideDividerPosition: { left: 288, bottom: 240 },
     leftSidePanePosition: { width: 280 },
     leftSideDividerPosition: { left: 280 },
-    contentPanePosition: { 'margin-left': 280, bottom: 250 },
+    contentPanePosition: { 'margin-left': 280, bottom: 0 },
     viewContentLoaded: false
 };
 
@@ -29,8 +29,8 @@ const transformLayout = (direction: string, value: number, state: any) => {
             return result;
         result.leftSideDividerPosition.left = value;
         result.leftSidePanePosition.width += diff;
-        result.bottomSideDividerPosition.left += diff;
-        result.bottomSidePanePosition.left += diff;
+        result.bottomSideDividerPosition && (result.bottomSideDividerPosition.left += diff);
+        result.bottomSidePanePosition && (result.bottomSidePanePosition.left += diff);
         result.contentPanePosition['margin-left'] += diff;
     }
     return result;
