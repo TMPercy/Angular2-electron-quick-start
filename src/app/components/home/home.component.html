@@ -23,7 +23,6 @@
                             <eo-url-input (urlChange)='onUrlChange($event)' (enableSend)='onEnableSend($event)' (protocolEmit)='onProtocolEmit($event)' [defaultValue]=""></eo-url-input>
                         </span>
                         <span class="cell"> 
-                            <a href="javascript:;" class="btn-link" title="Open Query Editor">? [0] </a> 
                         </span>
                         <span class="cell http-method">
                             <eo-action-button [customerStyle]="{'min-width':'100px','text-align':'left'}" [buttonText]="defaultMethod.text" type="default" [actions]="methods" (actionClick)="onMethodClick($event)"></eo-action-button>

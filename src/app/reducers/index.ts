@@ -10,7 +10,8 @@ export const InitialState = {
     leftSidePanePosition: { width: 280 },
     leftSideDividerPosition: { left: 280 },
     contentPanePosition: { 'margin-left': 280, bottom: 0 },
-    viewContentLoaded: false
+    viewContentLoaded: false,
+    responseBody: ''
 };
 
 const transformLayout = (direction: string, value: number, state: any) => {
