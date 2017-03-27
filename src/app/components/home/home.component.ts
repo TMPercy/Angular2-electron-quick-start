@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
 
     name: string;
     defaultMethod: ActionItem = { id: 0, text: 'GET' }
+    activeTab = 'tab1';
     methods: ActionItem[] = [
         {
             id: RequestMethod.Get,
@@ -96,9 +97,7 @@ export class HomeComponent implements OnInit {
     }
     ngAfterViewInit() {
         //when app is ready,remove loading
-        setTimeout(() => {
-            this.loader.setAppReady();
-        }, 1000)
+        this.loader.setAppReady();
     }
 
     onMethodClick(item: ActionItem) {

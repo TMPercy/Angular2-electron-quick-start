@@ -43,7 +43,22 @@
     z-index: -10;
 }
 
-// Fix for warning with electron - see https://github.com/electron/electron/issues/4420
- ::selection {
-    background: rgba(255, 255, 125, 0.99);
+.btn-success {
+    background: #4caf50;
+    color: #fff;
+    border: 1px solid #43a047;
+}
+
+.btn-header-add {
+    display: inline-block;
+    box-sizing: content-box;
+    padding: 2px 6px;
+    line-height: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 10px;
+    @extend .btn-success;
+    i {
+        font-size: 14px;
+    }
 }

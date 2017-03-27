@@ -22,6 +22,17 @@ em {
     display: block;
 }
 
+a {
+    color: #333;
+    &:hover,
+    &:active,
+    &:focus,
+    &:visited {
+        text-decoration: none;
+        color: #333;
+    }
+}
+
 // Fix for warning with electron - see https://github.com/electron/electron/issues/4420
  ::selection {
     background: rgba(255, 255, 125, 0.99);

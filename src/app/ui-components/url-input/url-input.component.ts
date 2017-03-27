@@ -4,7 +4,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 @Component({
     selector: 'eo-url-input',
     templateUrl: './url-input.component.html',
-    // styleUrls: ['url-input.component.scss']
+    styleUrls: ['url-input.component.scss']
 })
 export class UrlInputComponent {
 

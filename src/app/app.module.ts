@@ -21,6 +21,11 @@ import { ActionButtonComponent } from './ui-components/action-button/action-butt
 import { DragPaneComponent } from './ui-components/drag-pane/drag-pane.component';
 import { PreloaderComponent } from './ui-components/preloader/preloader.component';
 import { UrlInputComponent } from './ui-components/url-input/url-input.component';
+import { TabsComponent } from './ui-components/tabs/tabs.component';
+import { TabComponent } from './ui-components/tabs/tab.component';
+import { TabTitleDirective } from './ui-components/tabs/tab-title.directive';
+import { TabContentDirective } from './ui-components/tabs/tab-content.directive';
+
 /**
  * Import our child components
  */
@@ -38,6 +43,7 @@ import { AppComponent } from './components/app.component';
 /**
  *  Import our providers
  */
+import { UIComponentConfig } from './ui-components/config';
 import { LayoutService } from './services/layout.service';
 import { LoadService } from './services/loader.service';
 import { RequestService } from './services/request.service';
@@ -69,13 +75,17 @@ import { routes } from './app.routes';
         }),
         StoreDevtoolsModule.instrumentOnlyWithExtension()
     ],
-    providers: [LayoutService, LoadService, RequestService],
+    providers: [UIComponentConfig, LayoutService, LoadService, RequestService],
     declarations: [
         //ui-components
         ActionButtonComponent,
         DragPaneComponent,
         PreloaderComponent,
         UrlInputComponent,
+        TabComponent,
+        TabsComponent,
+        TabTitleDirective,
+        TabContentDirective,
         //custom-components
         AppComponent,
         HomeComponent,
