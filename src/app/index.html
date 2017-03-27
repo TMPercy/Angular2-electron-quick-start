@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Simple electron angular2">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+    <!-- use http://www.favicon-generator.org/ to replace files in public/icon-->
+
+    <!-- end favicon -->
+
+</head>
+
+<body>
+    <eo-app></eo-app>
+</body>
+<% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+    <!-- Webpack Dev Server reload -->
+    <script src="/webpack-dev-server.js"></script>
+    <% } %>
+
+</html>

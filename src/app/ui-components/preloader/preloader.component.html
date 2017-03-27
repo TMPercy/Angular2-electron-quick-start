@@ -1,0 +1,5 @@
+<div class="preloader" [class.preloader-hidden]="show">
+    <section class="loaders loaders-bg">
+        <span class="loader" [ngClass]="{'loader-circles':this.type=='circles', 'loader-double':this.type=='double','loader-quart':this.type=='quart'}"></span> {{loadinText}}
+    </section>
+</div>
