@@ -1,0 +1,22 @@
+.header {
+    min-height: 155px;
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    ul {
+        box-sizing: border-box;
+        margin-left: 15px;
+        margin-top: 10px;
+    }
+    li {
+        color: #9e9e9e;
+        line-height: 30px;
+        span {
+            display: inline;
+            color: #333;
+        }
+    }
+}

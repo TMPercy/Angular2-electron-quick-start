@@ -1,7 +1,7 @@
 /**
  * Import decorators and services from angular
  */
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 /**
  * Import the ngrx configured store
  */
@@ -13,14 +13,11 @@ import { AppState } from '../../store';
 declare var Notification: any;
 
 @Component({
-    selector: 'eo-pane',
-    templateUrl: './pane.component.html',
-    styleUrls: ['./pane.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    selector: 'eo-history',
+    templateUrl: './history.component.html',
+    styleUrls: ['./history.component.scss'],
 })
-export class PaneComponent implements OnInit {
-    @Input() title: string;
-    @Input() retainHead: boolean;
+export class HistoryComponent implements OnInit {
     name: string;
 
     constructor(public store: Store<AppState>) { }

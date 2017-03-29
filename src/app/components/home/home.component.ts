@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit {
 
     name: string;
     defaultMethod: ActionItem = { id: 0, text: 'GET' }
-    activeTab = 'tab1';
     methods: ActionItem[] = [
         {
             id: RequestMethod.Get,
@@ -71,12 +70,8 @@ export class HomeComponent implements OnInit {
         id: 1,
         text: 'HTTPS',
     }];
-    url: string = '123456';
+    url: string;
 
-
-    messageForm = new FormGroup({
-        messageText: new FormControl('Angular2'),
-    });
 
     draggingSign: boolean = false;
     draggingDiff: number;
@@ -92,6 +87,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         let state = this.store.select('AppStore').subscribe((state: any) => {
             this.appStore = Tools.transformPositon(state);
+            console.log(this.appStore)
             // this.ref.detectChanges();
         });
     }

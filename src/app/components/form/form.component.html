@@ -1,0 +1,7 @@
+<div>
+    <form [formGroup]="form">
+        <div *ngFor="let item of items" class="form-row">
+            <eo-form-item [items]="item" [form]="form"></eo-form-item>
+        </div>
+    </form>
+</div>

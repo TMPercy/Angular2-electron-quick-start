@@ -1,30 +1,7 @@
-<div>
-    <div class="h-container">
-        <div class="headers-form">
-            <div class="headers-ui-editor">
-                <div class="header-b">
-                    <div class="header-b-selected">
-                        <i class="iconfont icon-check"></i>
-                    </div>
-                </div>
-                <div class="header-b">
-                    <div class="header-b-move">
-                        <i class="iconfont icon-move"></i>
-                    </div>
-                </div>
-                <div class="expression-input-label">
-                    头部标签：
-                </div>
-                <div class="expression-input header-name">
-                    <input type="text" placeholder="name">
-                </div>
-                <div class="expression-input-label">
-                    头部内容:
-                </div>
-                <div class="expression-input header-value">
-                    <input type="text" placeholder="value">
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="header-content">
+    <eo-form [items]='formData'></eo-form>
+    <a class="btn-header-add">
+        添加
+        <i class="iconfont icon-add"></i>
+    </a>
 </div>

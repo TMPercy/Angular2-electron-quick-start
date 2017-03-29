@@ -33,6 +33,33 @@ a {
     }
 }
 
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+select {
+    outline: 0;
+    text-indent: 0;
+    margin-right: 5px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 3px;
+    font: small-caption;
+    font-size: 14px;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #2196f3;
+    border-color: #2196f3;
+}
+
 // Fix for warning with electron - see https://github.com/electron/electron/issues/4420
  ::selection {
     background: rgba(255, 255, 125, 0.99);

@@ -33,11 +33,13 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RequestBodyComponent } from './components/request-body/request-body.component';
 import { RequestHeaderComponent } from './components/request-header/request-header.component';
-import { RequestPaneComponent } from './components/request-pane/request-pane.component';
 import { ResponsePaneComponent } from './components/response-pane/response-pane.component';
 import { ResponseBodyComponent } from './components/response-body/response-body.component';
+import { ResponseHeaderComponent } from './components/response-header/response-header.component';
 import { PaneComponent } from './components/pane/pane.component';
-// // import { ResponseHeaderComponent } from './components/response-header/response-header.component';
+import { HistoryComponent } from './components/history/history.component';
+import { FormComponent } from './components/form/form.component';
+import { FormItemComponent } from './components/form-item/form-item.component';
 import { AppComponent } from './components/app.component';
 
 /**
@@ -47,6 +49,7 @@ import { UIComponentConfig } from './ui-components/config';
 import { LayoutService } from './services/layout.service';
 import { LoadService } from './services/loader.service';
 import { RequestService } from './services/request.service';
+import { FromDataControlService } from './services/formdata.service';
 
 /**
  * Import material UI Components
@@ -75,7 +78,7 @@ import { routes } from './app.routes';
         }),
         StoreDevtoolsModule.instrumentOnlyWithExtension()
     ],
-    providers: [UIComponentConfig, LayoutService, LoadService, RequestService],
+    providers: [UIComponentConfig, LayoutService, LoadService, RequestService, FromDataControlService],
     declarations: [
         //ui-components
         ActionButtonComponent,
@@ -92,10 +95,13 @@ import { routes } from './app.routes';
         NavbarComponent,
         RequestHeaderComponent,
         RequestBodyComponent,
-        RequestPaneComponent,
         ResponsePaneComponent,
         ResponseBodyComponent,
-        PaneComponent
+        ResponseHeaderComponent,
+        PaneComponent,
+        HistoryComponent,
+        FormComponent,
+        FormItemComponent
     ],
     bootstrap: [AppComponent]
 })

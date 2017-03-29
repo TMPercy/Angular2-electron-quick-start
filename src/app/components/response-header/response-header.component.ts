@@ -1,7 +1,7 @@
 /**
  * Import decorators and services from angular
  */
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 /**
  * Import the ngrx configured store
  */
@@ -13,12 +13,12 @@ import { AppState } from '../../store';
 declare var Notification: any;
 
 @Component({
-    selector: 'eo-request-pane',
-    templateUrl: './request-pane.component.html',
-    styleUrls: ['./request-pane.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    selector: 'eo-response-header',
+    templateUrl: './response-header.component.html',
+    styleUrls: ['./response-header.component.scss'],
 })
-export class RequestPaneComponent implements OnInit {
+export class ResponseHeaderComponent implements OnInit {
+    @Input() formData: any;
     name: string;
 
     constructor(public store: Store<AppState>) { }

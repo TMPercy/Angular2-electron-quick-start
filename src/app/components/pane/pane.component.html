@@ -2,7 +2,7 @@
     <div class="pane-head" *ngIf='title'>
         {{title}}
     </div>
-    <div class="pane-content">
+    <div class="pane-content" [class.pt-md]='retainHead'>
         <ng-content select="div"></ng-content>
     </div>
 </div>

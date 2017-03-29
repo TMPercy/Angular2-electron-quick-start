@@ -2,6 +2,10 @@ import { ActionReducer, Action } from '@ngrx/store';
 
 import { ERROR, Layout_H_Change, Layout_V_Change, View_Content_Loadded } from '../actions';
 
+import { DropdownItem } from '../components/form-item/form-item-dropdown';
+import { FormDataBase } from '../components/form-item/form.base';
+import { TextboxItem } from '../components/form-item/form-item-textbox';
+
 import { Tools } from '../lib/util';
 
 export const InitialState = {
@@ -11,7 +15,50 @@ export const InitialState = {
     leftSideDividerPosition: { left: 280 },
     contentPanePosition: { 'margin-left': 280, bottom: 0 },
     viewContentLoaded: false,
-    responseBody: ''
+    headerFormDatas: [[
+        new TextboxItem({
+            key: 'tag',
+            label: '头部参数:',
+            name: 'tag',
+            order: 1,
+            placeholder: ''
+        }),
+        new TextboxItem({
+            key: 'content',
+            label: '头部内容:',
+            name: 'content',
+            order: 2,
+            placeholder: ''
+        })
+    ]
+    ],
+    bodyFormDatas: [[
+        new TextboxItem({
+            key: 'name',
+            label: '参数名称:',
+            name: 'name',
+            order: 1,
+            placeholder: ''
+        }),
+        new DropdownItem({
+            key: 'type',
+            label: '类型:',
+            name: 'type',
+            options: [
+                { key: 'text', value: '[Text]' },
+                { key: 'file', value: '[File]' }
+            ],
+            order: 2
+        }),
+        new TextboxItem({
+            key: 'value',
+            label: '参数值:',
+            name: 'value',
+            order: 3,
+            placeholder: ''
+        })
+    ]
+    ]
 };
 
 const transformLayout = (direction: string, value: number, state: any) => {

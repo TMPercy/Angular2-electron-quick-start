@@ -1,0 +1,26 @@
+<div [formGroup]="form" class="eo-form">
+    <div class="form-b">
+        <div class="form-b-selected">
+            <i class="iconfont icon-check"></i>
+        </div>
+    </div>
+    <div class="form-b">
+        <div class="form-b-move">
+            <i class="iconfont icon-move"></i>
+        </div>
+    </div>
+    <div *ngFor="let item of items" [ngClass]="'form-'+item.name">
+        <div [ngSwitch]="item.controlType" class="flex-box">
+            <label [attr.for]="item.key" class="expression-input-label">{{item.label}}</label>
+
+            <div class="expression-input" [ngClass]="'input-'+item.name">
+                <input *ngSwitchCase="'textbox'" [formControlName]="item.key" [id]="item.key" [type]="item.type" [placeholder]="item.placeholder">
+
+                <select [id]=" item.key " *ngSwitchCase=" 'dropdown' " [formControlName]="item.key" [ngModel]="item.options[0].key">
+                    <option *ngFor="let opt of item.options " [value]="opt.key ">{{opt.value}}
+                </option>
+            </select>
+            </div>
+        </div>
+    </div>
+</div>

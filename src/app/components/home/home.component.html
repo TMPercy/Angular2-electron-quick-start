@@ -4,14 +4,12 @@
         <eo-drag-pane [direction]="'h'" (dragPaneHResize)="onDragPaneResize($event)" [customerPosition]="appStore.leftSideDividerPosition">
             <section>
                 <div class="eo-left-content" [ngStyle]="appStore.leftSidePanePosition">
-
+                    <eo-history></eo-history>
                 </div>
             </section>
         </eo-drag-pane>
         <div class="eo-right-content" [ngStyle]="appStore.contentPanePosition">
-
             <!--request-pane-->
-
             <eo-pane>
                 <div class="service form-horizontal">
                     <div class="flex-row">
@@ -39,129 +37,31 @@
 
             </eo-pane>
 
-            <eo-pane [title]="'请求头部：'">
+            <eo-pane [title]="'请求头部：'" retainHead='true'>
                 <!--request header content-->
                 <div class="headers">
-                    <eo-request-header></eo-request-header>
+                    <eo-request-header [formData]="appStore.headerFormDatas"></eo-request-header>
                 </div>
-                <a class="btn-header-add">
-                    添加
-                    <i class="iconfont icon-add"></i>
-                </a>
             </eo-pane>
 
 
             <eo-pane [title]="'请求参数：'">
-                <eo-tabs [(activeTab)]="activeTab">
-                    <eo-tab id="tab1" title="Home">
-                        <eo-template eoTabContent>
-                            <p>
-                                Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater
-                                eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-                            </p>
-                        </eo-template>
-                    </eo-tab>
 
-                    <eo-tab id="tab2" title="Profile">
-                        <eo-template eoTabContent>
-                            <p>
-                                Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo
-                                enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown.
-                                Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo
-                                park.
-                            </p>
-                        </eo-template>
-                    </eo-tab>
-
-                    <eo-tab id="tab3" title="Fat">
-                        <eo-template eoTabContent>
-                            <button class="btn btn-warning" (click)="alert('tab3')"> Alert</button>
-                            <p>
-                                Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy
-                                hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably
-                                haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.
-
-                            </p>
-                        </eo-template>
-                    </eo-tab>
-                </eo-tabs>
                 <!--request header content-->
                 <div class="body body-content">
-                    <eo-request-body></eo-request-body>
-
+                    <eo-request-body [formData]="appStore.bodyFormDatas"></eo-request-body>
                 </div>
             </eo-pane>
 
 
-            <!--request body content-->
+            <eo-pane [title]="'返回结果：'">
 
-            <!--response body-->
-            <eo-pane>
-                <!--request data body-->
-                <div class="request form-horizontal">
-
-                    <!--request header content-->
-                    <div class="headers">
-                        <eo-request-header></eo-request-header>
-
-                    </div>
-
-
+                <!--response content-->
+                <div class="response">
+                    <eo-response-pane></eo-response-pane>
                 </div>
             </eo-pane>
 
-
-            <eo-response-pane>
-                <div class="content">
-                    <div class="response-status-line response-status-line-error">
-                        <div class="status">
-                            <a href="http://tools.ietf.org/html/rfc7231#section-6.5.6" target="_blank">406 NOT ACCEPTABLE</a>
-                        </div>
-                    </div>
-
-                    <div class="h-container">
-                        <div class="headers">
-                            <div class="sub-label"> <a href="http://tools.ietf.org/html/rfc7230#section-3.2" target="_blank">Headers</a> </div>
-
-                            <div class="h-container">
-                                <table class="form-headers">
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="http://www.w3.org/TR/cors/#access-control-allow-credentials-response-header" target="_blank" class="header-link"><span title="Access-Control-Allow-Credentials">Access-Control-Allow-Credentials:</span></a></td>
-                                            <td></td>
-                                            <td><span title="true">true</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <a href="javascript:;" class="btn sent-headers btn-link"><i class="caret"></i> complete request headers </a>
-                                <!--hidden form headers-->
-                                <div>
-                                    <table class="form-headers">
-                                        <tbody>
-                                            <tr>
-                                                <td><a href="http://tools.ietf.org/html/rfc7231#section-5.3.2" target="_blank" class="header-link"><span title="Accept">Accept:</span></a></td>
-                                                <td></td>
-                                                <td><a class="gwt-Anchor" title="*/*">*/*</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="http://tools.ietf.org/html/rfc7231#section-5.3.5" target="_blank" class="header-link"><span title="Accept-Language">Accept-Language:</span></a></td>
-                                                <td></td>
-                                                <td><a class="gwt-Anchor" title="zh-CN,zh;q=0.8">zh-CN,zh;q=0.8</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="sent-headers-note">Note: <a href="http://www.w3.org/TR/XMLHttpRequest/#dom-xmlhttprequest-setrequestheader" target="_blank">XHR </a> automatically adds headers like Accept, Accept-Language, Cookie, User-Agent, etc. </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <eo-response-body></eo-response-body>
-                </div>
-            </eo-response-pane>
 
         </div>
 

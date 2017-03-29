@@ -3,14 +3,20 @@
     margin: 0 15px;
     border: 1px solid #e5e5e5;
     margin-top: 15px;
+    position: relative;
     .pane-head {
-        height: 35px;
-        line-height: 35px;
+        height: 36px;
+        line-height: 36px;
+        width: 99%;
         font-size: 14px;
         font-weight: 700;
         border-bottom: 1px solid #e5e5e5;
+        position: absolute;
+        top: 0;
+        left: 6px;
     }
     .pane-content {
+        position: relative;
         .service {
             display: table;
             width: 100%;
@@ -45,12 +51,6 @@
                 }
             }
         }
-        .headers {
-            width: 100%;
-            display: table;
-            white-space: nowrap;
-            padding: 0 0 0 10px;
-        }
     }
 }
 
@@ -68,4 +68,8 @@
     border: 1px solid #e5e5e5;
     border-radius: 3px;
     padding: 6px 5px;
+}
+
+.pt-md {
+    padding-top: 30px;
 }

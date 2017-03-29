@@ -29,6 +29,9 @@ let tools = {
             }
         }
         return result;
+    },
+    seed: () => {
+        return (new Date()).getTime().toString().substr(-2, 2) + Math.floor(Math.random() * 100);
     }
 }
 
