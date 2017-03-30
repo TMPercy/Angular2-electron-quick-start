@@ -1,7 +1,7 @@
 <div>
     <form [formGroup]="form">
-        <div *ngFor="let item of items" class="form-row">
-            <eo-form-item [items]="item" [form]="form"></eo-form-item>
+        <div *ngFor="let item of items;let key = index;" class="form-row">
+            <eo-form-item (selectHandler)="onEmitItemSelect($event)" (deleteHandler)="onEmitItemDelete($event)" (changeHandler)="onEmitItemChange($event)" [items]="item" [form]="form" [index]="key"></eo-form-item>
         </div>
     </form>
 </div>

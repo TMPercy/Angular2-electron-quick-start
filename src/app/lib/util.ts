@@ -32,6 +32,19 @@ let tools = {
     },
     seed: () => {
         return (new Date()).getTime().toString().substr(-2, 2) + Math.floor(Math.random() * 100);
+    },
+    transformHeaderPayload: (obj: any) => {
+        let result = {};
+        for (let i = 0, len = obj.length; i < len - 1; i += 2) {
+            result[obj[i]] = obj[i + 1];
+        }
+        return result;
+    },
+    transformBodyPayload: (obj: any) => {
+
+    },
+    copy: (obj: any) => {
+        return JSON.parse(JSON.stringify(obj));
     }
 }
 

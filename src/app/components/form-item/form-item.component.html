@@ -1,26 +1,29 @@
 <div [formGroup]="form" class="eo-form">
     <div class="form-b">
-        <div class="form-b-selected">
-            <i class="iconfont icon-check"></i>
+        <div class="form-b-selected" (click)="onSelectButtonClick(index)">
+            <i class="iconfont icon-check" *ngIf="checked"></i>
         </div>
     </div>
     <div class="form-b">
-        <div class="form-b-move">
+        <div class="form-b-move" (click)="onDeleteButtonClick(index)">
             <i class="iconfont icon-move"></i>
         </div>
     </div>
-    <div *ngFor="let item of items" [ngClass]="'form-'+item.name">
+    <div *ngFor="let item of items.row;let i = index" [ngClass]="'form-'+item.name">
         <div [ngSwitch]="item.controlType" class="flex-box">
             <label [attr.for]="item.key" class="expression-input-label">{{item.label}}</label>
 
             <div class="expression-input" [ngClass]="'input-'+item.name">
-                <input *ngSwitchCase="'textbox'" [formControlName]="item.key" [id]="item.key" [type]="item.type" [placeholder]="item.placeholder">
+                <input *ngSwitchCase="'textbox'" [formControlName]="item.key" [id]="item.key" [type]="item.type" [placeholder]="i>1&&items.row[i-1].defaultValue=='file'?'请选择测试文件':item.placeholder" (ngModelChange)="onModelChange(item,$event)" [readonly]="i>1&&items.row[i-1].defaultValue=='file'">
 
-                <select [id]=" item.key " *ngSwitchCase=" 'dropdown' " [formControlName]="item.key" [ngModel]="item.options[0].key">
-                    <option *ngFor="let opt of item.options " [value]="opt.key ">{{opt.value}}
-                </option>
-            </select>
+                <select [id]=" item.key " *ngSwitchCase=" 'dropdown' " [formControlName]="item.key" [(ngModel)]="item.defaultValue" (change)="onSelectChange($event);">
+                    <option *ngFor="let opt of item.options " [value]="opt.key ">{{opt.value}}</option>
+                </select>
             </div>
+        </div>
+        <div class="file-input" *ngIf="item.defaultValue=='file'">
+            <input type="file" [attr.id]="item.key+'file'" (change)="onChange($event)">
+            <label [attr.for]="item.key+'file'" class="file-label">选择文件</label>
         </div>
     </div>
 </div>

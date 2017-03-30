@@ -1,6 +1,15 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-import { ERROR, Layout_H_Change, Layout_V_Change, View_Content_Loadded } from '../actions';
+import {
+    ERROR,
+    Layout_H_Change,
+    Layout_V_Change,
+    View_Content_Loadded,
+    ADD_HEADER_FORMDATA,
+    DELETE_HEADER_FORMDATA,
+    UPDATE_HEADER_CHECK_STATUS,
+    UPDATE_HEADER_FORMDATA
+} from '../actions';
 
 import { DropdownItem } from '../components/form-item/form-item-dropdown';
 import { FormDataBase } from '../components/form-item/form.base';
@@ -15,49 +24,61 @@ export const InitialState = {
     leftSideDividerPosition: { left: 280 },
     contentPanePosition: { 'margin-left': 280, bottom: 0 },
     viewContentLoaded: false,
-    headerFormDatas: [[
-        new TextboxItem({
-            key: 'tag',
-            label: '头部参数:',
-            name: 'tag',
-            order: 1,
-            placeholder: ''
-        }),
-        new TextboxItem({
-            key: 'content',
-            label: '头部内容:',
-            name: 'content',
-            order: 2,
-            placeholder: ''
-        })
-    ]
+    headerFormDatas: [{
+        row: [
+            new TextboxItem({
+                key: 'tag',
+                label: '头部参数:',
+                name: 'tag',
+                value: '',
+                order: 1,
+                placeholder: ''
+            }),
+            new TextboxItem({
+                key: 'content',
+                label: '头部内容:',
+                name: 'content',
+                value: '',
+                order: 2,
+                placeholder: ''
+            })
+        ], checked: true
+    }
     ],
-    bodyFormDatas: [[
-        new TextboxItem({
-            key: 'name',
-            label: '参数名称:',
-            name: 'name',
-            order: 1,
-            placeholder: ''
-        }),
-        new DropdownItem({
-            key: 'type',
-            label: '类型:',
-            name: 'type',
-            options: [
-                { key: 'text', value: '[Text]' },
-                { key: 'file', value: '[File]' }
-            ],
-            order: 2
-        }),
-        new TextboxItem({
-            key: 'value',
-            label: '参数值:',
-            name: 'value',
-            order: 3,
-            placeholder: ''
-        })
-    ]
+    bodyFormDatas: [{
+        row: [
+            new TextboxItem({
+                key: 'name',
+                label: '参数名称:',
+                name: 'name',
+                type: 'text',
+                value: '',
+                order: 1,
+                placeholder: ''
+            }),
+            new DropdownItem({
+                defaultValue: 'text',
+                key: 'type',
+                label: '类型:',
+                name: 'type',
+                value: '',
+                options: [
+                    { key: 'text', value: '[Text]' },
+                    { key: 'file', value: '[File]' }
+                ],
+                order: 2
+            }),
+            new TextboxItem({
+                key: 'value',
+                label: '参数值:',
+                type: 'text',
+                value: '',
+                name: 'value',
+                order: 3,
+                placeholder: ''
+            })
+        ], checked: true
+    }
     ]
 };
 
@@ -84,9 +105,51 @@ const transformLayout = (direction: string, value: number, state: any) => {
     return result;
 }
 
+const generateHeaderFormData = (state: any): any[] => {
+    let _new = Tools.copy(state);
+    let _key = Tools.seed();
+    let item = {
+        row: [
+            new TextboxItem({
+                key: 'tag' + _key,
+                label: '头部参数:',
+                name: 'tag',
+                value: '',
+                order: 1,
+                placeholder: ''
+            }),
+            new TextboxItem({
+                key: 'content' + _key,
+                label: '头部内容:',
+                name: 'content',
+                value: '',
+                order: 2,
+                placeholder: ''
+            })
+        ], checked: true
+    }
+    _new.headerFormDatas.push(item);
+    return _new;
+}
+const removeHeaderFormData = (state: any, index: number): any[] => {
+    let _new = Tools.copy(state);
+    _new.headerFormDatas.splice(index, 1)
+    return _new;
+}
+const updateHeaderFormData = (state: any, payload: any): any[] => {
+    let _new = Tools.copy(state);
+    for (let i = 0; i < _new.headerFormDatas.length; i++) {
+        for (let j = 0; j < _new.headerFormDatas[i].row.length; j++) {
+            _new.headerFormDatas[i].row[j]['value'] = payload[_new.headerFormDatas[i].row[j].key];
+        }
+    }
+    console.log(_new, 9999, payload)
+    return _new;
+}
 
-export const AppStore: ActionReducer<Object> = (state: Object = InitialState, action: Action) => {
-    let transformObject: any;;
+export const AppStore: ActionReducer<Object> = (state: any = InitialState, action: Action) => {
+    let transformObject: any;
+    let _new;
     switch (action.type) {
         case ERROR:
             return {
@@ -110,6 +173,21 @@ export const AppStore: ActionReducer<Object> = (state: Object = InitialState, ac
                 ...state,
                 viewContentLoaded: action.payload.value
             };
+        case ADD_HEADER_FORMDATA:
+            _new = generateHeaderFormData(state);
+            return {
+                ..._new
+            };
+        case DELETE_HEADER_FORMDATA:
+            _new = removeHeaderFormData(state, action.payload.index);
+            return {
+                ..._new
+            };
+        case UPDATE_HEADER_FORMDATA:
+            _new = updateHeaderFormData(state, action.payload.payload)
+            return {
+                ..._new
+            }
         default:
             return state;
     }

@@ -1,35 +1,59 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { FormDataBase } from '../form-item/form.base';
 import { FromDataControlService } from '../../services/formdata.service';
 
+import { Tools } from '../../lib/util';
+
 @Component({
     selector: 'eo-form',
-    templateUrl: './form.component.html'
+    templateUrl: './form.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class FormComponent implements OnInit {
 
-    @Input() items: FormDataBase<any>[][];
+    @Input() items: {
+        row: FormDataBase<any>[][],
+        checked: boolean
+    };
+    @Input() type: string;
+    @Output() emitItemDelete = new EventEmitter<number>();
+    @Output() emitItemSelect = new EventEmitter<any>();
+    @Output() emitItemChange = new EventEmitter<any>();
+
+
     form: FormGroup;
     payLoad = '';
 
-    constructor(private qcs: FromDataControlService) {
+    constructor(private fds: FromDataControlService) {
 
     }
 
     ngOnInit() {
-        this.form = this.qcs.toFormGroup(this.items);
+        this.form = this.fds.toFormGroup(this.items);
+    }
+    ngOnChanges(changes): void {
+        this.form = this.fds.toFormGroup(changes.items.currentValue);
     }
 
-    onSubmit() {
-        this.payLoad = JSON.stringify(this.form.value);
+    onEmitItemSelect($event) {
+        this.emitItemSelect.emit($event);
+    }
+    onEmitItemDelete($event) {
+        this.emitItemDelete.emit($event);
+    }
+    onEmitItemChange($event) {
+        if ($event) {
+            if (this.type == 'header') {
+                console.log('header data', this.form.value)
+                this.emitItemChange.emit((this.form.value))
+
+            } else {
+                console.log(this.form.value, this.items)
+                // this.emitItemChange.emit(Tools.transformBodyPayload(this.payLoad))
+            }
+        }
     }
 }
-
-
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

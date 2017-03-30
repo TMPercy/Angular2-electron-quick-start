@@ -1,6 +1,6 @@
 <div class="header-content">
-    <eo-form [items]='formData'></eo-form>
-    <a class="btn-header-add">
+    <eo-form [items]='formData' (emitItemSelect)="onHeadlerFormSelect($event)" (emitItemDelete)="onHeadlerFormDelete($event)" (emitItemChange)="updateFormData($event)" [type]="'header'"></eo-form>
+    <a class="btn-header-add" (click)="addFormData()">
         添加
         <i class="iconfont icon-add"></i>
     </a>

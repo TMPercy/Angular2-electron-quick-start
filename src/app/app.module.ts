@@ -52,6 +52,10 @@ import { RequestService } from './services/request.service';
 import { FromDataControlService } from './services/formdata.service';
 
 /**
+ *  Import our pipes
+ */
+import { transformFormValuePipe } from './components/form-item/form.pipe';
+/**
  * Import material UI Components
  */
 // import { MaterialModule } from '@angular/material';
@@ -101,7 +105,9 @@ import { routes } from './app.routes';
         PaneComponent,
         HistoryComponent,
         FormComponent,
-        FormItemComponent
+        FormItemComponent,
+        //custom-pipes
+        transformFormValuePipe
     ],
     bootstrap: [AppComponent]
 })

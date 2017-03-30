@@ -172,4 +172,5 @@ export class HomeComponent implements OnInit {
             () => console.log('Authentication Complete')
         )
     }
+
 }

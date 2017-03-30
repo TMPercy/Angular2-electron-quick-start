@@ -26,7 +26,7 @@ export class RequestBodyComponent implements OnInit {
     constructor(public store: Store<AppState>) { }
 
     ngOnInit() {
-
+        console.log('body', this.formData)
     }
 
 }
