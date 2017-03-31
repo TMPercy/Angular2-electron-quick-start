@@ -47,12 +47,9 @@ export class FormComponent implements OnInit {
     onEmitItemChange($event) {
         if ($event) {
             if (this.type == 'header') {
-                console.log('header data', this.form.value)
                 this.emitItemChange.emit((this.form.value))
-
             } else {
-                console.log(this.form.value, this.items)
-                // this.emitItemChange.emit(Tools.transformBodyPayload(this.payLoad))
+                this.emitItemChange.emit((this.form.value))
             }
         }
     }

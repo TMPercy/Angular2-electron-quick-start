@@ -52,7 +52,17 @@ module.exports = function(options) {
             library: 'ac_[name]',
             libraryTarget: 'var'
         },
-
+        //replace path for iconfont run on the electron dir
+        module: {
+            rules: [{
+                test: /iconfont\.scss$/,
+                loader: 'webpack-replace',
+                query: {
+                    search: 'assets/fonts',
+                    replace: '../assets/fonts'
+                }
+            }]
+        },
         plugins: [
             /**
              * Plugin: NamedModulesPlugin (experimental)

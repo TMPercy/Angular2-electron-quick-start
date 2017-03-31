@@ -1,5 +1,5 @@
 export class FormDataBase<T>{
-    value: T;
+    value: string | FileList;
     key: string;
     label: string;
     name: string;
@@ -9,7 +9,7 @@ export class FormDataBase<T>{
     placeholder: string;
     defaultValue: string;
     constructor(options: {
-        value?: T,
+        value?: string | FileList,
         key?: string,
         label?: string,
         name?: string,

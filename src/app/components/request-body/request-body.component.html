@@ -4,8 +4,8 @@
             <eo-tab id="form-data" title="表单[form-data]">
                 <template eoTabContent>
                     <div class="body-content">
-                        <eo-form [items]='formData'></eo-form>
-                        <a class="btn-header-add">
+                        <eo-form [items]='formData' (emitItemSelect)="onHeadlerFormSelect($event)" (emitItemDelete)="onHeadlerFormDelete($event)" (emitItemChange)="updateFormData($event)"  [type]="'body'"></eo-form>
+                        <a class="btn-header-add" (click)="addFormData()">
                             添加
                             <i class="iconfont icon-add"></i>
                         </a>

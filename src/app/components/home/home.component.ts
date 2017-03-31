@@ -87,8 +87,6 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         let state = this.store.select('AppStore').subscribe((state: any) => {
             this.appStore = Tools.transformPositon(state);
-            console.log(this.appStore)
-            // this.ref.detectChanges();
         });
     }
     ngAfterViewInit() {

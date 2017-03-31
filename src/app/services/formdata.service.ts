@@ -9,7 +9,11 @@ import {
     ADD_HEADER_FORMDATA,
     DELETE_HEADER_FORMDATA,
     UPDATE_HEADER_FORMDATA,
-    UPDATE_HEADER_CHECK_STATUS
+    UPDATE_HEADER_CHECK_STATUS,
+    ADD_BODY_FORMDATA,
+    DELETE_BODY_FORMDATA,
+    UPDATE_BODY_FORMDATA,
+    UPDATE_BODY_CHECK_STATUS
 } from '../actions';
 
 
@@ -30,7 +34,8 @@ export class FromDataControlService {
         return new FormGroup(group);
     }
 
-    addHeaderFormData() {
+    addHeaderFormData(payload: any) {
+
         this.store.dispatch({
             type: ADD_HEADER_FORMDATA,
             payload: {}
@@ -45,16 +50,52 @@ export class FromDataControlService {
         })
     }
     updateHeaderFormData(payload: any) {
+        if (payload) {
+            this.store.dispatch({
+                type: UPDATE_HEADER_FORMDATA,
+                payload: {
+                    payload: payload
+                }
+            })
+        }
+    }
+    updateHeaderFormDataCheckStatus(payload: any) {
         this.store.dispatch({
-            type: UPDATE_HEADER_FORMDATA,
+            type: UPDATE_HEADER_CHECK_STATUS,
             payload: {
                 payload: payload
             }
         })
     }
-    updateHeaderFormDataCheckStatus(payload: any) {
+
+    addBodyFormData(payload: any) {
+
         this.store.dispatch({
-            type: UPDATE_HEADER_CHECK_STATUS,
+            type: ADD_BODY_FORMDATA,
+            payload: {}
+        })
+    }
+    removeBodyFormData(index: number) {
+        this.store.dispatch({
+            type: DELETE_BODY_FORMDATA,
+            payload: {
+                index: index
+            }
+        })
+    }
+    updateBodyFormData(payload: any) {
+        if (payload) {
+            this.store.dispatch({
+                type: UPDATE_BODY_FORMDATA,
+                payload: {
+                    payload: payload
+                }
+            })
+        }
+    }
+    updateBodyFormDataCheckStatus(payload: any) {
+        this.store.dispatch({
+            type: UPDATE_BODY_CHECK_STATUS,
             payload: {
                 payload: payload
             }

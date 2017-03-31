@@ -8,7 +8,11 @@ import {
     ADD_HEADER_FORMDATA,
     DELETE_HEADER_FORMDATA,
     UPDATE_HEADER_CHECK_STATUS,
-    UPDATE_HEADER_FORMDATA
+    UPDATE_HEADER_FORMDATA,
+    ADD_BODY_FORMDATA,
+    DELETE_BODY_FORMDATA,
+    UPDATE_BODY_CHECK_STATUS,
+    UPDATE_BODY_FORMDATA
 } from '../actions';
 
 import { DropdownItem } from '../components/form-item/form-item-dropdown';
@@ -94,7 +98,7 @@ const transformLayout = (direction: string, value: number, state: any) => {
     }
     else if (direction == 'h') {
         let diff = value - result.leftSideDividerPosition.left;
-        if (value < 280)
+        if (value < 160 || value > 430)
             return result;
         result.leftSideDividerPosition.left = value;
         result.leftSidePanePosition.width += diff;
@@ -152,6 +156,76 @@ const updateHeaderCheckStatus = (state: any, payload: any): any[] => {
 }
 
 
+
+
+const generateBodyFormData = (state: any): any[] => {
+    let _new = Tools.copy(state);
+    let _key = Tools.seed();
+    let item = {
+        row: [
+            new TextboxItem({
+                key: 'name' + _key,
+                label: '参数名称:',
+                name: 'name',
+                type: 'text',
+                value: '',
+                order: 1,
+                placeholder: ''
+            }),
+            new DropdownItem({
+                defaultValue: 'text',
+                key: 'type' + _key,
+                label: '类型:',
+                name: 'type',
+                value: '',
+                options: [
+                    { key: 'text', value: '[Text]' },
+                    { key: 'file', value: '[File]' }
+                ],
+                order: 2
+            }),
+            new TextboxItem({
+                key: 'value' + _key,
+                label: '参数值:',
+                type: 'text',
+                value: '',
+                name: 'value',
+                order: 3,
+                placeholder: ''
+            })
+        ], checked: true
+    }
+    _new.bodyFormDatas.push(item);
+    return _new;
+}
+const removeBodyFormData = (state: any, index: number): any[] => {
+    let _new = Tools.copy(state);
+    _new.bodyFormDatas.splice(index, 1)
+    return _new;
+}
+const updateBodyFormData = (state: any, payload: any): any[] => {
+    console.log(payload)
+    let _new = Tools.copy(state);
+    for (let i = 0; i < _new.bodyFormDatas.length; i++) {
+        for (let j = 0; j < _new.bodyFormDatas[i].row.length; j++) {
+            if (payload[_new.bodyFormDatas[i].row[j].key] instanceof File) {
+                _new.bodyFormDatas[i].row[j]['value'] = new File([payload[_new.bodyFormDatas[i].row[j].key].slice(0, payload[_new.bodyFormDatas[i].row[j].key].size, payload[_new.bodyFormDatas[i].row[j].key].type)], payload[_new.bodyFormDatas[i].row[j].key].name, payload[_new.bodyFormDatas[i].row[j].key].prototype);
+                console.log(_new.bodyFormDatas[i].row[j]['value'])
+                // _new.bodyFormDatas[i].row[j]['value'] = Tools.copy(payload[_new.bodyFormDatas[i].row[j].key]);
+            } else {
+                _new.bodyFormDatas[i].row[j]['value'] = payload[_new.bodyFormDatas[i].row[j].key];
+            }
+        }
+    }
+    console.log(_new)
+    return _new;
+}
+const updateBodyCheckStatus = (state: any, payload: any): any[] => {
+    let _new = Tools.copy(state);
+    _new.bodyFormDatas[payload.index].checked = payload.checked;
+    return _new;
+}
+
 export const AppStore: ActionReducer<Object> = (state: any = InitialState, action: Action) => {
     let transformObject: any;
     let _new;
@@ -195,6 +269,26 @@ export const AppStore: ActionReducer<Object> = (state: any = InitialState, actio
             }
         case UPDATE_HEADER_CHECK_STATUS:
             _new = updateHeaderCheckStatus(state, action.payload.payload)
+            return {
+                ..._new
+            }
+        case ADD_BODY_FORMDATA:
+            _new = generateBodyFormData(state);
+            return {
+                ..._new
+            };
+        case DELETE_BODY_FORMDATA:
+            _new = removeBodyFormData(state, action.payload.index);
+            return {
+                ..._new
+            };
+        case UPDATE_BODY_FORMDATA:
+            _new = updateBodyFormData(state, action.payload.payload)
+            return {
+                ..._new
+            }
+        case UPDATE_BODY_CHECK_STATUS:
+            _new = updateBodyCheckStatus(state, action.payload.payload)
             return {
                 ..._new
             }

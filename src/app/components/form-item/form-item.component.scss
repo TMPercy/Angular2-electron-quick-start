@@ -62,9 +62,15 @@
             }
         }
     }
+    .input-mock {
+        width: 100%;
+        height: 33px;
+        text-indent: 10px;
+        border-radius: 3px;
+    }
     .file-input {
         position: absolute;
-        width: 100px;
+        width: 100%;
         right: 1px;
         top: 10px;
         input {
@@ -82,6 +88,18 @@
             right: 0;
             z-index: 0;
         }
+        .file-name {
+            width: 200px;
+            height: 33px;
+            line-height: 33px;
+            text-align: left;
+            top: 0;
+            right: 150px;
+            z-index: 1;
+            position: absolute;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         .file-label {
             width: 100px;
             height: 33px;
@@ -95,7 +113,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            z-index: 1;
+            z-index: 2;
         }
     }
     .form-tag {
@@ -112,5 +130,8 @@
     }
     .form-value {
         flex: 1;
+    }
+    .hidden {
+        display: none;
     }
 }

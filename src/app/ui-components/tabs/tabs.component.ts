@@ -14,8 +14,7 @@ import { UIComponentConfig } from '../config';
 @Component({
   selector: 'eo-tabs',
   templateUrl: './tabs.component.html',
-  exportAs: 'tabs',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  exportAs: 'tabs'
 })
 export class TabsComponent implements OnInit, AfterContentInit {
   @Input() type: 'tabs' | 'pills' = 'tabs';

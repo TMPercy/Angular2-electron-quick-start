@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 import { FormGroup } from '@angular/forms';
 
 import { FormDataBase } from './form.base';
-
+import { Tools } from '../../lib/util';
 
 @Component({
     selector: 'eo-form-item',
@@ -20,12 +20,27 @@ export class FormItemComponent {
 
     checked: boolean = true;
     timer: any = null;
-    file: FileList;
+    file: File;
+    reader: FileReader = new FileReader();
+    filekey: string;
 
     ngOnInit() {
+        this.reader.onload = (event: any) => {
+            let base64 = event.target.result;
+            let obj = {};
+            console.log(Tools.generateSign(), 7897897)
+            obj[this.filekey] = this.file.name + '(' + this.file.type + ')' + Tools.generateSign() + base64;
+            this.form.setValue({ ...this.form.value, ...obj });
+            this.onModelChange();
+        }
     }
     // get isValid() { return this.form.controls[this.item.key].valid; }
-
+    ngOnChanges(changes) {
+        this.checked = changes.items.currentValue.checked;
+        if (changes.items.currentValue.row.length > 2 && changes.items.currentValue.row[2].value.length > 100) {
+            this.file = changes.items.currentValue.row[2].value;
+        }
+    }
     onSelectButtonClick(index: number) {
         this.checked = !this.checked;
         if (this.timer) {
@@ -48,16 +63,24 @@ export class FormItemComponent {
     }
     onSelectChange($event) {
         if ($event.target.value == 'text') {
-            setTimeout(() => { this.form.setValue({ ...this.form.value, value: '' }) }, 0)
+            let obj = {};
+            obj[this.filekey] = '';
+            this.form.setValue({ ...this.form.value, ...obj })
         }
     }
-    onChange(event: EventTarget) {
+    onChange(event: EventTarget, items) {
         let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
         let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
         let files: FileList = target.files;
-        this.file = files;
-        this.form.setValue({ ...this.form.value, value: this.file })
-        // this.items.row[2].value = this.file;
-        this.onModelChange();
+        let obj = {};
+        console.log(files, 8888)
+        this.filekey = items.key;
+        this.file = files.length > 0 ? files[0] : null;
+        if (this.file) {
+            this.reader.readAsDataURL(this.file)
+        } else {
+            obj[items.key] = '';
+            this.form.setValue({ ...this.form.value, ...obj })
+        }
     }
 }
