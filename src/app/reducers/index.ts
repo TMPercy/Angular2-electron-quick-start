@@ -143,9 +143,14 @@ const updateHeaderFormData = (state: any, payload: any): any[] => {
             _new.headerFormDatas[i].row[j]['value'] = payload[_new.headerFormDatas[i].row[j].key];
         }
     }
-    console.log(_new, 9999, payload)
     return _new;
 }
+const updateHeaderCheckStatus = (state: any, payload: any): any[] => {
+    let _new = Tools.copy(state);
+    _new.headerFormDatas[payload.index].checked = payload.checked;
+    return _new;
+}
+
 
 export const AppStore: ActionReducer<Object> = (state: any = InitialState, action: Action) => {
     let transformObject: any;
@@ -185,6 +190,11 @@ export const AppStore: ActionReducer<Object> = (state: any = InitialState, actio
             };
         case UPDATE_HEADER_FORMDATA:
             _new = updateHeaderFormData(state, action.payload.payload)
+            return {
+                ..._new
+            }
+        case UPDATE_HEADER_CHECK_STATUS:
+            _new = updateHeaderCheckStatus(state, action.payload.payload)
             return {
                 ..._new
             }

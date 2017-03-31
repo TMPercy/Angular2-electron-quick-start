@@ -29,6 +29,7 @@ export class RequestHeaderComponent implements OnInit {
     }
     onHeadlerFormSelect($event) {
         console.log('select', $event)
+        this.fds.updateHeaderFormDataCheckStatus($event);
     }
     onHeadlerFormDelete($event) {
         this.fds.removeHeaderFormData($event);

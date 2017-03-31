@@ -8,7 +8,8 @@ import { FormDataBase } from '../components/form-item/form.base';
 import {
     ADD_HEADER_FORMDATA,
     DELETE_HEADER_FORMDATA,
-    UPDATE_HEADER_FORMDATA
+    UPDATE_HEADER_FORMDATA,
+    UPDATE_HEADER_CHECK_STATUS
 } from '../actions';
 
 
@@ -46,6 +47,14 @@ export class FromDataControlService {
     updateHeaderFormData(payload: any) {
         this.store.dispatch({
             type: UPDATE_HEADER_FORMDATA,
+            payload: {
+                payload: payload
+            }
+        })
+    }
+    updateHeaderFormDataCheckStatus(payload: any) {
+        this.store.dispatch({
+            type: UPDATE_HEADER_CHECK_STATUS,
             payload: {
                 payload: payload
             }
