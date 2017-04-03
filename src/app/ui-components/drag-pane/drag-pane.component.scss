@@ -10,7 +10,7 @@
         bottom: 246px;
         padding-top: 5px;
         .line {
-            border-bottom: solid #aaa 1px;
+            border-bottom: solid #e5e5e5 1px;
             margin: 0 0 3px 0;
             padding: 0;
             width: 100%;
@@ -23,11 +23,11 @@
         top: 50px;
         bottom: 0;
         width: 15px;
-        padding-left: 3px;
         position: fixed;
+        z-index: 10;
         cursor: ew-resize;
         .line {
-            border-left: solid #aaa 1px;
+            border-left: solid #e5e5e5 1px;
             width: 1px;
             height: 100%;
         }

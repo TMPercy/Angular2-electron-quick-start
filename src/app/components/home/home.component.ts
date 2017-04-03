@@ -70,12 +70,8 @@ export class HomeComponent implements OnInit {
         id: 1,
         text: 'HTTPS',
     }];
-    url: string = '123456';
+    url: string;
 
-
-    messageForm = new FormGroup({
-        messageText: new FormControl('Angular2'),
-    });
 
     draggingSign: boolean = false;
     draggingDiff: number;
@@ -91,14 +87,11 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         let state = this.store.select('AppStore').subscribe((state: any) => {
             this.appStore = Tools.transformPositon(state);
-            // this.ref.detectChanges();
         });
     }
     ngAfterViewInit() {
         //when app is ready,remove loading
-        setTimeout(() => {
-            this.loader.setAppReady();
-        }, 1000)
+        this.loader.setAppReady();
     }
 
     onMethodClick(item: ActionItem) {
@@ -165,11 +158,9 @@ export class HomeComponent implements OnInit {
     onSendingRequest() {
         let headers = new Headers();
         headers.append('Accept', 'application/json');
-        console.log(this.url, typeof (this.url))
         let url = this.defaultProtocol.text.toLocaleLowerCase() + '://' + this.url;
         let method = this.defaultMethod.id;
         let data = "";
-        console.log(url)
         this.res.request(method, url, headers, data).subscribe(
             response => {
                 //call the store to update the authToken
@@ -179,4 +170,5 @@ export class HomeComponent implements OnInit {
             () => console.log('Authentication Complete')
         )
     }
+
 }

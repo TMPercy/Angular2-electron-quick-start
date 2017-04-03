@@ -4,21 +4,19 @@
         <eo-drag-pane [direction]="'h'" (dragPaneHResize)="onDragPaneResize($event)" [customerPosition]="appStore.leftSideDividerPosition">
             <section>
                 <div class="eo-left-content" [ngStyle]="appStore.leftSidePanePosition">
-
+                    <eo-history></eo-history>
                 </div>
             </section>
         </eo-drag-pane>
         <div class="eo-right-content" [ngStyle]="appStore.contentPanePosition">
-
             <!--request-pane-->
-
-            <eo-request-pane>
+            <eo-pane>
                 <div class="service form-horizontal">
-                    <div class="row">
+                    <div class="flex-row">
                         <span class="cell protocol"> 
                             <eo-action-button [customerStyle]="{'min-width':'80px','text-align':'left'}" [buttonText]="defaultProtocol.text" type="default" [actions]="protocols" (actionClick)="onProtocolClick($event)"></eo-action-button>
                         </span>
-                        <span class="cell"> :// </span>
+                        <span class="cell "> :// </span>
                         <span class="cell-url"> 
                             <eo-url-input (urlChange)='onUrlChange($event)' (enableSend)='onEnableSend($event)' (protocolEmit)='onProtocolEmit($event)' [defaultValue]=""></eo-url-input>
                         </span>
@@ -28,80 +26,42 @@
                             <eo-action-button [customerStyle]="{'min-width':'100px','text-align':'left'}" [buttonText]="defaultMethod.text" type="default" [actions]="methods" (actionClick)="onMethodClick($event)"></eo-action-button>
                         </span>
                         <span class="cell send-button"> 
-                            <eo-action-button (buttonClick)='onSendingRequest($event)' [disabled]='!enableSend' [buttonAction]=true [customerStyle]="{'min-width':'60px','text-align':'left'}" [buttonText]="'Send'" [actions]="[]" icon="glyphicon glyphicon-send" [type]="'primary'"></eo-action-button>
+                            <a class="btn btn-primary btn-block" (click)='onSendingRequest($event)'>
+                                <i class="iconfont icon-fasong"></i>
+                                发送
+                            </a>
+                            <!--<eo-action-button (buttonClick)='onSendingRequest($event)' [disabled]='!enableSend' [buttonAction]=true [customerStyle]="{'min-width':'60px','text-align':'left'}" [buttonText]="'Send'" [actions]="[]" icon="glyphicon glyphicon-send" [type]="'primary'"></eo-action-button>-->
                         </span>
                     </div>
                 </div>
-                <!--request data body-->
-                <div class="request form-horizontal">
 
-                    <!--request header content-->
-                    <div class="headers">
-                        <eo-request-header></eo-request-header>
-                    </div>
-                    <!--request body content-->
-                    <div class="body body-content">
-                        <eo-request-body></eo-request-body>
-                    </div>
+            </eo-pane>
 
+            <eo-pane [title]="'请求头部：'" retainHead='true'>
+                <!--request header content-->
+                <div class="headers">
+                    <eo-request-header [formData]="appStore.headerFormDatas"></eo-request-header>
                 </div>
-            </eo-request-pane>
+            </eo-pane>
 
 
+            <eo-pane [title]="'请求参数：'">
 
-
-            <!--response body-->
-            <eo-response-pane>
-                <div class="content">
-                    <div class="response-status-line response-status-line-error">
-                        <div class="status">
-                            <a href="http://tools.ietf.org/html/rfc7231#section-6.5.6" target="_blank">406 NOT ACCEPTABLE</a>
-                        </div>
-                    </div>
-
-                    <div class="h-container">
-                        <div class="headers">
-                            <div class="sub-label"> <a href="http://tools.ietf.org/html/rfc7230#section-3.2" target="_blank">Headers</a> </div>
-
-                            <div class="h-container">
-                                <table class="form-headers">
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="http://www.w3.org/TR/cors/#access-control-allow-credentials-response-header" target="_blank" class="header-link"><span title="Access-Control-Allow-Credentials">Access-Control-Allow-Credentials:</span></a></td>
-                                            <td></td>
-                                            <td><span title="true">true</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <a href="javascript:;" class="btn sent-headers btn-link"><i class="caret"></i> complete request headers </a>
-                                <!--hidden form headers-->
-                                <div>
-                                    <table class="form-headers">
-                                        <tbody>
-                                            <tr>
-                                                <td><a href="http://tools.ietf.org/html/rfc7231#section-5.3.2" target="_blank" class="header-link"><span title="Accept">Accept:</span></a></td>
-                                                <td></td>
-                                                <td><a class="gwt-Anchor" title="*/*">*/*</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="http://tools.ietf.org/html/rfc7231#section-5.3.5" target="_blank" class="header-link"><span title="Accept-Language">Accept-Language:</span></a></td>
-                                                <td></td>
-                                                <td><a class="gwt-Anchor" title="zh-CN,zh;q=0.8">zh-CN,zh;q=0.8</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="sent-headers-note">Note: <a href="http://www.w3.org/TR/XMLHttpRequest/#dom-xmlhttprequest-setrequestheader" target="_blank">XHR </a> automatically adds headers like Accept, Accept-Language, Cookie, User-Agent, etc. </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <eo-response-body></eo-response-body>
+                <!--request header content-->
+                <div class="body body-content">
+                    <eo-request-body [formData]="appStore.bodyFormDatas"></eo-request-body>
                 </div>
-            </eo-response-pane>
+            </eo-pane>
+
+
+            <eo-pane [title]="'返回结果：'">
+
+                <!--response content-->
+                <div class="response">
+                    <eo-response-pane></eo-response-pane>
+                </div>
+            </eo-pane>
+
 
         </div>
 

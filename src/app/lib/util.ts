@@ -2,6 +2,8 @@
  * tool-lib
  */
 'use strict';
+import * as _ from "underscore";
+let base64Sign;
 let tools = {
     namespace: (name?: string) => {
         return (v?: string) => {
@@ -29,6 +31,40 @@ let tools = {
             }
         }
         return result;
+    },
+    seed: () => {
+        return (new Date()).getTime().toString().substr(-2, 2) + Math.floor(Math.random() * 100);
+    },
+    transformHeaderPayload: (obj: any) => {
+        let result = {};
+        for (let i = 0, len = obj.length; i < len - 1; i += 2) {
+            result[obj[i]] = obj[i + 1];
+        }
+        return result;
+    },
+    transformBodyPayload: (obj: any) => {
+
+    },
+    fransformFileToValue: (obj: any) => {
+        let result = this.copy(obj);
+        for (let i in obj) {
+            if (obj[i] instanceof File) {
+                result[i] = obj[i].name
+            }
+        }
+        return result;
+    },
+    copy: (obj: any) => {
+        // return _.clone(obj);
+        return JSON.parse(JSON.stringify(obj));
+    },
+    isEqual: (object, other) => {
+        return _.isEqual(object, other);
+    },
+    generateSign: () => {
+        if (base64Sign) return base64Sign;
+        base64Sign = 'base64Sign' + Math.floor(Math.random() * 100);
+        return base64Sign;
     }
 }
 

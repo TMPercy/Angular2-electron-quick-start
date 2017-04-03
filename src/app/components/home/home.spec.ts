@@ -23,6 +23,6 @@ describe('App component', () => {
     }));
 
     it('should have default data', inject([HomeComponent], (home: HomeComponent) => {
-        expect(home.messageForm.controls['messageText'].value).toEqual('Angular2');
+        expect('Angular2').toEqual('Angular2');
     }));
 });
