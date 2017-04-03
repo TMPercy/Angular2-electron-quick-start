@@ -161,14 +161,15 @@ export class HomeComponent implements OnInit {
         let url = this.defaultProtocol.text.toLocaleLowerCase() + '://' + this.url;
         let method = this.defaultMethod.id;
         let data = "";
-        this.res.request(method, url, headers, data).subscribe(
-            response => {
-                //call the store to update the authToken
-                console.log(response)
-            },
-            err => console.log(err),
-            () => console.log('Authentication Complete')
-        )
+        console.log(this.appStore);
+        // this.res.request(method, url, headers, data).subscribe(
+        //     response => {
+        //         //call the store to update the authToken
+        //         console.log(response)
+        //     },
+        //     err => console.log(err),
+        //     () => console.log('Authentication Complete')
+        // )
     }
 
 }

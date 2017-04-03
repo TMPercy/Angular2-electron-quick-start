@@ -14,15 +14,15 @@
             <label [attr.for]="item.key" class="expression-input-label">{{item.label}}</label>
 
             <div class="expression-input" [ngClass]="'input-'+item.name">
-                <input *ngSwitchCase="'textbox'" [class.hidden]="file&&i==2" [formControlName]="item.key" [id]="item.key" [type]="item.type" [placeholder]="i>1&&items.row[i-1].defaultValue=='file'?'请选择测试文件':item.placeholder" (ngModelChange)="onModelChange(item,$event)"
-                    [readonly]="i>1&&items.row[i-1].defaultValue=='file'">
+                <input *ngSwitchCase="'textbox'" [class.hidden]="file&&i==2" [formControlName]="item.key||''" [id]="item.key" [type]="item.type" [placeholder]="i>1&&items.row[i-1].value=='file'?'请选择测试文件':item.placeholder" (ngModelChange)="onModelChange(item,$event)"
+                    [readonly]="i>1&&items.row[i-1].value=='file'">
                 <div [class.input-mock]="file&&i==2"></div>
-                <select [id]=" item.key " *ngSwitchCase=" 'dropdown' " [formControlName]="item.key" [(ngModel)]="item.defaultValue" (change)="onSelectChange($event);">
+                <select [id]=" item.key " *ngSwitchCase=" 'dropdown' " [formControlName]="item.key||''" [(ngModel)]="item.value" (change)="onSelectChange($event);">
                     <option *ngFor="let opt of item.options " [value]="opt.key ">{{opt.value}}</option>
                 </select>
             </div>
         </div>
-        <div class="file-input" *ngIf="item.defaultValue=='file'">
+        <div class="file-input" *ngIf="item.value=='file'">
             <label class="file-name" [title]="file|transformFormValue">{{file|transformFormValue}}</label>
             <input type="file" [attr.id]="item.key+'file'" (change)="onChange($event,items.row[i+1])">
             <label [attr.for]="item.key+'file'" class="file-label">选择文件</label>

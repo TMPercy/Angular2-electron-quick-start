@@ -21,6 +21,8 @@ import {
 export class FromDataControlService {
     constructor(public store: Store<AppState>) {
     }
+    headerFormData: any;
+    bodyFormData: any;
 
     toFormGroup(formdatas: any) {
         let group: any = {};
@@ -34,32 +36,38 @@ export class FromDataControlService {
         return new FormGroup(group);
     }
 
-    addHeaderFormData(payload: any) {
 
-        this.store.dispatch({
-            type: ADD_HEADER_FORMDATA,
-            payload: {}
-        })
-    }
-    removeHeaderFormData(index: number) {
-        this.store.dispatch({
-            type: DELETE_HEADER_FORMDATA,
-            payload: {
-                index: index
-            }
-        })
-    }
+
     updateHeaderFormData(payload: any) {
-        if (payload) {
+        this.headerFormData = payload;
+
+    }
+
+    updateBodyFormData(payload: any) {
+        this.bodyFormData = payload;
+
+    }
+    updateBeforeOperate() {
+        if (this.bodyFormData) {
+            this.store.dispatch({
+                type: UPDATE_BODY_FORMDATA,
+                payload: {
+                    payload: this.bodyFormData
+                }
+            })
+        }
+
+        if (this.headerFormData) {
             this.store.dispatch({
                 type: UPDATE_HEADER_FORMDATA,
                 payload: {
-                    payload: payload
+                    payload: this.headerFormData
                 }
             })
         }
     }
     updateHeaderFormDataCheckStatus(payload: any) {
+        this.updateBeforeOperate();
         this.store.dispatch({
             type: UPDATE_HEADER_CHECK_STATUS,
             payload: {
@@ -67,33 +75,9 @@ export class FromDataControlService {
             }
         })
     }
-
-    addBodyFormData(payload: any) {
-
-        this.store.dispatch({
-            type: ADD_BODY_FORMDATA,
-            payload: {}
-        })
-    }
-    removeBodyFormData(index: number) {
-        this.store.dispatch({
-            type: DELETE_BODY_FORMDATA,
-            payload: {
-                index: index
-            }
-        })
-    }
-    updateBodyFormData(payload: any) {
-        if (payload) {
-            this.store.dispatch({
-                type: UPDATE_BODY_FORMDATA,
-                payload: {
-                    payload: payload
-                }
-            })
-        }
-    }
     updateBodyFormDataCheckStatus(payload: any) {
+        this.updateBeforeOperate();
+
         this.store.dispatch({
             type: UPDATE_BODY_CHECK_STATUS,
             payload: {
@@ -101,5 +85,43 @@ export class FromDataControlService {
             }
         })
     }
+    addBodyFormData(payload: any) {
+        this.updateBeforeOperate();
+
+
+        this.store.dispatch({
+            type: ADD_BODY_FORMDATA,
+            payload: {}
+        })
+    }
+    addHeaderFormData(payload: any) {
+        this.updateBeforeOperate();
+
+        this.store.dispatch({
+            type: ADD_HEADER_FORMDATA,
+            payload: {}
+        })
+    }
+    removeBodyFormData(index: number) {
+        this.updateBeforeOperate();
+
+        this.store.dispatch({
+            type: DELETE_BODY_FORMDATA,
+            payload: {
+                index: index
+            }
+        })
+    }
+    removeHeaderFormData(index: number) {
+        this.updateBeforeOperate();
+
+        this.store.dispatch({
+            type: DELETE_HEADER_FORMDATA,
+            payload: {
+                index: index
+            }
+        })
+    }
+
 
 }

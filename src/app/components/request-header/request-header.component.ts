@@ -21,7 +21,6 @@ export class RequestHeaderComponent implements OnInit {
     name: string;
     timer: any = null;
     formdatas: any;
-    updateSign: boolean = false;
 
     constructor(public store: Store<AppState>, private fds: FromDataControlService) {
     }
@@ -30,19 +29,13 @@ export class RequestHeaderComponent implements OnInit {
 
     }
     onHeadlerFormSelect($event) {
-        //update formdata before select a  item.
-        this.updateHeaderFormData();
 
         this.fds.updateHeaderFormDataCheckStatus($event);
     }
     onHeadlerFormDelete($event) {
-        //update formdata before delete a  item.
-        this.updateHeaderFormData();
         this.fds.removeHeaderFormData($event);
     }
     addFormData() {
-        //update formdata before adding a new item.
-        this.updateHeaderFormData();
 
         if (this.timer) {
             clearTimeout(this.timer);
@@ -52,15 +45,8 @@ export class RequestHeaderComponent implements OnInit {
         }, 100)
     }
     updateFormData($event) {
-        this.updateSign = true;
         this.formdatas = $event;
-        // this.fds.updateHeaderFormData($event);
+        this.fds.updateHeaderFormData($event);
     }
 
-    updateHeaderFormData() {
-        if (this.updateSign) {
-            this.fds.updateHeaderFormData(this.formdatas)
-            this.updateSign = false;
-        }
-    }
 }

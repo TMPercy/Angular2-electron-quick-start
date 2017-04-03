@@ -61,11 +61,10 @@ export const InitialState = {
                 placeholder: ''
             }),
             new DropdownItem({
-                defaultValue: 'text',
                 key: 'type',
                 label: '类型:',
                 name: 'type',
-                value: '',
+                value: 'text',
                 options: [
                     { key: 'text', value: '[Text]' },
                     { key: 'file', value: '[File]' }
@@ -173,11 +172,10 @@ const generateBodyFormData = (state: any): any[] => {
                 placeholder: ''
             }),
             new DropdownItem({
-                defaultValue: 'text',
                 key: 'type' + _key,
                 label: '类型:',
                 name: 'type',
-                value: '',
+                value: 'text',
                 options: [
                     { key: 'text', value: '[Text]' },
                     { key: 'file', value: '[File]' }
@@ -208,18 +206,12 @@ const updateBodyFormData = (state: any, payload: any): any[] => {
     let _new = Tools.copy(state);
     for (let i = 0; i < _new.bodyFormDatas.length; i++) {
         for (let j = 0; j < _new.bodyFormDatas[i].row.length; j++) {
-            if (payload[_new.bodyFormDatas[i].row[j].key] instanceof File) {
-                _new.bodyFormDatas[i].row[j]['value'] = new File([payload[_new.bodyFormDatas[i].row[j].key].slice(0, payload[_new.bodyFormDatas[i].row[j].key].size, payload[_new.bodyFormDatas[i].row[j].key].type)], payload[_new.bodyFormDatas[i].row[j].key].name, payload[_new.bodyFormDatas[i].row[j].key].prototype);
-                console.log(_new.bodyFormDatas[i].row[j]['value'])
-                // _new.bodyFormDatas[i].row[j]['value'] = Tools.copy(payload[_new.bodyFormDatas[i].row[j].key]);
-            } else {
-                _new.bodyFormDatas[i].row[j]['value'] = payload[_new.bodyFormDatas[i].row[j].key];
-            }
+            _new.bodyFormDatas[i].row[j]['value'] = payload[_new.bodyFormDatas[i].row[j].key];
         }
     }
-    console.log(_new)
     return _new;
 }
+
 const updateBodyCheckStatus = (state: any, payload: any): any[] => {
     let _new = Tools.copy(state);
     _new.bodyFormDatas[payload.index].checked = payload.checked;

@@ -63,9 +63,16 @@ export class FormItemComponent {
     }
     onSelectChange($event) {
         if ($event.target.value == 'text') {
-            let obj = {};
-            obj[this.filekey] = '';
-            this.form.setValue({ ...this.form.value, ...obj })
+            if (this.filekey) {
+                let obj = {};
+                obj[this.filekey] = '';
+                this.file = null;
+                this.form.setValue({ ...this.form.value, ...obj })
+
+            }
+
+
+
         }
     }
     onChange(event: EventTarget, items) {
@@ -73,12 +80,12 @@ export class FormItemComponent {
         let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
         let files: FileList = target.files;
         let obj = {};
-        console.log(files, 8888)
         this.filekey = items.key;
         this.file = files.length > 0 ? files[0] : null;
         if (this.file) {
             this.reader.readAsDataURL(this.file)
         } else {
+            this.filekey = '';
             obj[items.key] = '';
             this.form.setValue({ ...this.form.value, ...obj })
         }

@@ -31,7 +31,6 @@ export class RequestBodyComponent implements OnInit {
     timer: any = null;
 
     formdatas: any;
-    updateSign: boolean = false;
 
     constructor(public store: Store<AppState>, private fds: FromDataControlService, private zone: NgZone) {
     }
@@ -41,21 +40,17 @@ export class RequestBodyComponent implements OnInit {
     ngOnChanges(changes) {
     }
     onHeadlerFormSelect($event) {
-        //update formdata before select a  item.
-        this.updateBodyFormData();
+
 
         this.fds.updateBodyFormDataCheckStatus($event);
     }
     onHeadlerFormDelete($event) {
-        //update formdata before delete a  item.
-        this.updateBodyFormData();
+
 
         this.fds.removeBodyFormData($event);
     }
     addFormData() {
-        console.log('add')
-        //update formdata before adding a new item.
-        this.updateBodyFormData();
+
         if (this.timer) {
             clearTimeout(this.timer);
         }
@@ -64,13 +59,10 @@ export class RequestBodyComponent implements OnInit {
         }, 100)
     }
     updateFormData($event) {
-        this.updateSign = true;
         this.formdatas = $event;
+        console.log($event)
+        this.fds.updateBodyFormData(this.formdatas)
+
     }
-    updateBodyFormData() {
-        if (this.updateSign) {
-            this.fds.updateBodyFormData(this.formdatas)
-            this.updateSign = false;
-        }
-    }
+
 }
