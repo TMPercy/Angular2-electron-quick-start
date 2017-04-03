@@ -1,5 +1,5 @@
-.header-content {
-    padding: 0 0 0 10px;
+.h-container {
+    padding: 0 0 0 4px;
 }
 
 .btn-group {
@@ -26,94 +26,48 @@
     }
 }
 
-.headers-form {
-    padding: 10px 0;
-    border-bottom: 1px dotted #e5e5e5;
-}
-
-.headers-form {
+.headers-ui-editor {
     position: relative;
     display: flex;
     align-items: center;
-    .header-b {
-        margin: 0;
-        display: inline-flex;
-        &>input {
-            margin-right: 10px;
-        }
-    }
-    .header-b-selected,
-    .header-b-move {
-        height: 23px;
-        line-height: 23px;
-        width: 23px;
-        border: 1px solid #e5e5e5;
-        border-radius: 3px;
-        text-align: center;
-        margin-right: 5px;
-        cursor: pointer;
-    }
-    .header-b-selected {
-        &>i {
-            color: green;
-        }
-    }
-    .header-b-move {
-        background: #f2f2f2;
-        color: #a3a3a3;
-        &:hover {
-            background: #d32f2f;
-            color: #fff;
-            border: 1px solid #c62828;
-        }
-    }
-    .expression-input-label {
-        display: inline-flex;
-        margin: 0 10px;
-    }
-    .expression-input {
-        display: inline-flex;
-        flex: 1;
-        margin-bottom: 0;
-        input {
-            width: 100%;
-            height: 33px;
-            border: 1px solid #ddd;
-            text-indent: 10px;
-            background-color: #fff;
-            -webkit-border-radius: 3px;
-            border-radius: 3px;
-            &:focus {
-                outline: 0;
+    label {
+        &.header-b {
+            margin: 0;
+            display: inline;
+            &>input {
+                margin-right: 10px;
             }
         }
     }
+    .expression-input {
+        display: inline-flex;
+        width: 100%;
+        margin-bottom: 0;
+    }
     .header-name {
-        max-width: 154px;
+        width: 130px;
         margin: 1px 2px 1px 3px;
     }
     .header-value {
-        flex: 2;
+        width: 150px;
         margin: 1px 0 1px 2px;
     }
 }
 
-.btn-success {
-    background: #4caf50;
-    color: #fff;
-    border: 1px solid #43a047;
+.btn-link {
+    color: #666;
+    &:hover {
+        color: #666;
+    }
 }
 
-.btn-header-add {
-    display: inline-block;
-    box-sizing: content-box;
-    padding: 2px 6px;
-    line-height: 20px;
-    cursor: pointer;
-    border-radius: 3px;
-    margin-top: 10px;
-    @extend .btn-success;
-    i {
-        font-size: 14px;
+.sub-label {
+    font-size: 13px;
+    font-weight: 100;
+    margin: 0 0 5px 2px;
+    color: #444;
+    text-transform: uppercase;
+    a {
+        color: #444;
     }
 }

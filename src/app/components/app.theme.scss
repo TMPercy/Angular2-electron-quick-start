@@ -2,7 +2,6 @@
 
 $icon-font-path: "./assets/fonts/";
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap";
-@import "../common/iconfont.scss";
 //format
 * {
     font-family: "Microsoft YaHei", "Hiragino Sans GB", "PingFang SC", "SimHei", "宋体", "Arial Unicode MS";
@@ -13,56 +12,13 @@ body,
 html {
     margin: 0;
     padding: 0;
-    background-color: #fafafa !important;
+    background-color: #eaeaea !important;
 }
 
 span,
 i,
 em {
     display: block;
-}
-
-a {
-    color: #333;
-    &:hover,
-    &:active,
-    &:focus,
-    &:visited {
-        text-decoration: none;
-        color: #333;
-    }
-}
-
-ul,
-li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-label {
-    font-weight: normal;
-    margin: 0;
-}
-
-select {
-    outline: 0;
-    text-indent: 0;
-    margin-right: 5px;
-    height: 30px;
-    line-height: 30px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    border-radius: 3px;
-    font: small-caption;
-    font-size: 14px;
-    padding: 0 5px;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background-color: #2196f3;
-    border-color: #2196f3;
 }
 
 // Fix for warning with electron - see https://github.com/electron/electron/issues/4420

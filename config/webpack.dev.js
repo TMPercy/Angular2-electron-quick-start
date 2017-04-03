@@ -63,6 +63,7 @@ module.exports = function(options) {
                 }
             }]
         },
+
         plugins: [
             /**
              * Plugin: NamedModulesPlugin (experimental)

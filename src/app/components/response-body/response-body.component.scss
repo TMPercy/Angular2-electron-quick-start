@@ -1,32 +1,23 @@
 .response-body {
-    min-height: 130px;
-    background-color: #f8f8f8;
-    border: 1px solid #e5e5e5;
-    margin-top: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    font-size: 14px;
     padding: 5px;
-    line-height: 20px;
-    font-size: 12px;
-    max-width: 100%;
+    min-height: 70px;
+    white-space: pre-wrap;
+    line-height: 1.4em;
     width: 100%;
-    word-break: break-all;
-    max-height: 550px;
-    overflow: auto;
+    .unknown {
+        padding: 30px 50px 20px 50px;
+        font-size: 40px;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: #fff;
+        text-shadow: #aaa 0 0 80px;
+        font-family: sans-serif, arial;
+    }
 }
 
-.response-status {
-    width: 99.8%;
-    height: 30px;
-    line-height: 30px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    color: #fff;
-    margin-top: 5px;
-    text-indent: 10px;
-    font-size: 16px;
-    &.error {
-        background-color: #d32f2f;
-        border: 1px solid #c62828;
+.sub-label {
+    a {
+        color: #444;
     }
 }

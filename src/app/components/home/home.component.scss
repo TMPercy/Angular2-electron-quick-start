@@ -1,49 +1,202 @@
-.row {
-    margin-left: -20px;
-    &:before,
-    &:after {
-        display: table;
-        line-height: 0;
-        content: "";
-    }
-}
-
-.eo-home-container {}
-
-.eo-left-content {
-    width: 280px;
-    position: fixed;
-    left: 0;
-    top: 50px;
-    bottom: 0;
-    background: #fff;
-}
-
-.eo-right-content {
-    margin-left: 280px;
-    overflow: auto;
-    bottom: 260px;
-    position: fixed;
-    right: 0;
-    top: 50px;
-    z-index: -20;
-    left: 0;
-}
-
-.eo-pane {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 281px;
-    min-height: 0 !important;
-    height: 240px;
-    padding: 3px 10px 5px 0 !important;
-    background-color: #f0f0f0;
-    z-index: -10;
-}
-
-.headers,
-.body {
-    width: 100%;
-    white-space: nowrap;
-}
+        .row {
+            margin-left: -20px;
+            &:before,
+            &:after {
+                display: table;
+                line-height: 0;
+                content: "";
+            }
+        }
+        
+        .pane {
+            min-height: 70px;
+            padding: 15px 10px 10px 10px !important;
+        }
+        
+        .eo-home-container {
+            background-color: #eaeaea;
+        }
+        
+        .eo-left-content {
+            width: 280px;
+            position: fixed;
+            left: 0;
+            top: 50px;
+            bottom: 0;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+        
+        .eo-right-content {
+            margin-left: 280px;
+            overflow: auto;
+            bottom: 260px;
+            position: fixed;
+            right: 0;
+            top: 50px;
+            z-index: -20;
+            min-width: 850px;
+            left: 0;
+            background-color: #eaeaea;
+            .response-pane {
+                padding-bottom: 80px;
+                background-color: #fafafa;
+                margin: 15px 15px 40px 10px;
+                .pane-head-ng {
+                    font-size: 14px;
+                    font-weight: 800;
+                    margin: 0 0 7px 0;
+                    color: #444;
+                    text-transform: uppercase;
+                    line-height: 20px;
+                    padding: 0 0 5px 0;
+                    span {
+                        padding-left: 1px;
+                        display: inline-block;
+                    }
+                    a {
+                        display: inline-block;
+                    }
+                }
+                .response-time {
+                    float: right;
+                }
+                .el-time {
+                    font-size: 9px;
+                    color: #444;
+                    padding: 0 15px 0 0;
+                    font-weight: 400;
+                    text-transform: capitalize;
+                }
+                .remote-cache {
+                    color: #444;
+                    font-size: 9px;
+                    text-decoration: none;
+                    &:hover,
+                    &:visited,
+                    &:active {
+                        color: #444;
+                        font-size: 9px;
+                    }
+                }
+                .content {
+                    .status {
+                        padding: 15px 20px 12px 20px;
+                        font-size: 20px;
+                        font-weight: bold;
+                        letter-spacing: 1px;
+                        font-family: Consolas, "Andale Mono", monospace !important;
+                    }
+                    .response-status-line {
+                        margin: 0 0 20px 0;
+                        border-radius: 2px;
+                        color: #fff;
+                        a {
+                            color: #fff;
+                            text-decoration: none;
+                            &:hover,
+                            &:visited,
+                            &:active {
+                                color: #fff;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    .response-status-line-error {
+                        background-color: #e45e62;
+                    }
+                    .h-container {
+                        .headers {
+                            width: 400px;
+                            float: left;
+                            display: inline;
+                            white-space: nowrap;
+                            color: #000;
+                            padding: 0 0 0 10px;
+                            .sent-headers {
+                                padding-left: 0;
+                                margin-top: 10px;
+                                color: #444;
+                                text-transform: uppercase;
+                                font-size: 11px;
+                                text-decoration: none;
+                            }
+                            .sent-headers-note {
+                                white-space: normal;
+                                padding: 7px 28px 0 14px;
+                                font-size: 12px;
+                                color: #333;
+                            }
+                        }
+                        .sub-label {
+                            a {
+                                color: #444;
+                            }
+                        }
+                        .form-headers {
+                            max-width: 100%;
+                            background-color: transparent;
+                            border-collapse: collapse;
+                            border-spacing: 0;
+                            tr {
+                                &>td {
+                                    padding: 0;
+                                    margin: 0;
+                                    font-size: 14px;
+                                    &:first-child {
+                                        width: 140px;
+                                        max-width: 140px;
+                                        min-width: 140px;
+                                        height: 15px;
+                                        font-size: 13px;
+                                        padding: 1px 0 1px 0;
+                                        font-weight: normal;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        a {
+                                            color: #444;
+                                            text-decoration: none;
+                                            &:hover,
+                                            &:visited,
+                                            &:active {
+                                                color: #444;
+                                            }
+                                        }
+                                        span {
+                                            display: inline;
+                                        }
+                                    }
+                                    &:last-child {
+                                        width: 240px;
+                                        max-width: 240px;
+                                        min-width: 240px;
+                                        font-size: 14px;
+                                        padding: 1px 0 1px 0;
+                                        font-weight: normal;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        .eo-pane {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 281px;
+            min-height: 0 !important;
+            height: 240px;
+            padding: 3px 10px 5px 0 !important;
+            background-color: #f0f0f0;
+            z-index: -10;
+        }
+        
+        // Fix for warning with electron - see https://github.com/electron/electron/issues/4420
+         ::selection {
+            background: rgba(255, 255, 125, 0.99);
+        }
