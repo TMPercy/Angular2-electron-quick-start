@@ -18,6 +18,7 @@ import { ActionItem } from '../../ui-components/action-button/action-item.model'
 import { LayoutService } from '../../services/layout.service';
 import { LoadService } from '../../services/loader.service';
 import { RequestService } from '../../services/request.service';
+import { FromDataControlService } from '../../services/formdata.service';
 import { Tools } from '../../lib/util';
 
 // Allow us to use Notification API here.
@@ -34,7 +35,7 @@ interface dragData {
     styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-    constructor(public store: Store<AppState>, private layout: LayoutService, private loader: LoadService, private res: RequestService) {
+    constructor(public store: Store<AppState>, private layout: LayoutService, private loader: LoadService, private res: RequestService, private fds: FromDataControlService) {
         this.layout = layout;
         this.loader = loader;
         this.res = res;
@@ -77,7 +78,7 @@ export class HomeComponent implements OnInit {
     draggingDiff: number;
     draggingDirection: string;
     //layout data
-    appStore: any;
+    appStore: AppState;
 
     //enable send request
     enableSend: boolean = false;
@@ -150,26 +151,50 @@ export class HomeComponent implements OnInit {
         this.enableSend = sign;
     }
     onUrlChange(url?: string) {
-        console.log(url)
         if (url) {
             this.url = url;
         }
     }
     onSendingRequest() {
-        let headers = new Headers();
-        headers.append('Accept', 'application/json');
+        let headers: Headers;
+        let data: any;
         let url = this.defaultProtocol.text.toLocaleLowerCase() + '://' + this.url;
         let method = this.defaultMethod.id;
-        let data = "";
-        console.log(this.appStore);
-        // this.res.request(method, url, headers, data).subscribe(
-        //     response => {
-        //         //call the store to update the authToken
-        //         console.log(response)
-        //     },
-        //     err => console.log(err),
-        //     () => console.log('Authentication Complete')
-        // )
+        let customerHeader: any;
+        let files: any;
+        let isMuti: boolean;
+        //update formdate before formate
+        this.fds.updateBeforeOperate();
+
+
+
+        isMuti = this.appStore.isMutipartForm;
+
+        headers = new Headers();
+        headers.append('Accept', 'application/json');
+        customerHeader = Tools.formatHeaderData(this.appStore.headerFormDatas);
+        for (let property in customerHeader) {
+            if (customerHeader.hasOwnProperty(property))
+                headers.append(property, customerHeader[property]);
+        }
+        if (isMuti) {
+            let body = Tools.formatBodyFormData(this.appStore.bodyFormDatas);
+            data = body.postdata;
+            console.log(body)
+            files = body.files;
+        } else {
+            data = Tools.formatBodyData(this.appStore.bodyFormDatas);
+
+        }
+        console.log(customerHeader, isMuti, Tools.formatBodyData(this.appStore.bodyFormDatas))
+        this.res.request(method, url, headers, data, files, isMuti).subscribe(
+            response => {
+                //call the store to update the authToken
+                console.log(response)
+            },
+            err => console.log(err),
+            () => console.log('Authentication Complete')
+        )
     }
 
 }

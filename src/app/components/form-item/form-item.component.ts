@@ -49,6 +49,7 @@ export class FormItemComponent {
         this.timer = setTimeout(() => {
             this.selectHandler.emit({ index: index, checked: this.checked });
         }, 200)
+
     }
     onDeleteButtonClick(index: number) {
         this.deleteHandler.emit(index);
@@ -74,6 +75,7 @@ export class FormItemComponent {
 
 
         }
+        this.onModelChange();
     }
     onChange(event: EventTarget, items) {
         let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
@@ -89,5 +91,7 @@ export class FormItemComponent {
             obj[items.key] = '';
             this.form.setValue({ ...this.form.value, ...obj })
         }
+        this.onModelChange();
+
     }
 }

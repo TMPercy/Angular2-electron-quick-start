@@ -60,7 +60,6 @@ export class RequestBodyComponent implements OnInit {
     }
     updateFormData($event) {
         this.formdatas = $event;
-        console.log($event)
         this.fds.updateBodyFormData(this.formdatas)
 
     }

@@ -8,5 +8,7 @@ export interface AppState {
     leftSideDividerPosition: { left: number },
     contentPanePosition: { 'margin-left': number, bottom: number },
     viewContentLoaded: boolean,
-    headerFormDatas: FormDataBase<any>[][]
+    headerFormDatas: FormDataBase<any>[][],
+    bodyFormDatas: FormDataBase<any>[][],
+    isMutipartForm: boolean
 };

@@ -23,11 +23,26 @@ export class RequestService {
         this.http = http;
     }
 
-    request(method: string | number = RequestMethod.Get, url: string, headers: Headers, data: any, responseType: ResponseContentType = ResponseContentType.Json) {
+    request(method: string | number = RequestMethod.Get, url: string, headers: Headers, data: any, files?: [{ file: File, name: string }], isMuti?: boolean, responseType: ResponseContentType = ResponseContentType.Json) {
+        if (isMuti && files.length > 0) {
+            let formData: FormData = new FormData();
+            for (let i = 0, len = files.length; i < len; i++) {
+                formData.append(files[i].name, files[i].file, files[i].file.name);
+            }
+            if (data !== "" && data !== undefined && data !== null) {
+                for (let property in data) {
+                    if (data.hasOwnProperty(property)) {
+                        formData.append(property, data[property]);
+                    }
+                }
+            }
+            data = formData;
+        }
         return this.http.request(new Request({
             method: method,
             url: url,
             headers: headers,
+            body: data,
             //setting ensure sending cookie to server
             withCredentials: true,
             responseType: responseType

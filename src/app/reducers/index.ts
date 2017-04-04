@@ -82,7 +82,8 @@ export const InitialState = {
             })
         ], checked: true
     }
-    ]
+    ],
+    isMutipartForm: false
 };
 
 const transformLayout = (direction: string, value: number, state: any) => {
@@ -207,6 +208,9 @@ const updateBodyFormData = (state: any, payload: any): any[] => {
     for (let i = 0; i < _new.bodyFormDatas.length; i++) {
         for (let j = 0; j < _new.bodyFormDatas[i].row.length; j++) {
             _new.bodyFormDatas[i].row[j]['value'] = payload[_new.bodyFormDatas[i].row[j].key];
+        }
+        if (_new.bodyFormDatas[i].row[1]['value'] == 'file' && _new.bodyFormDatas[i].row[2]['value'] !== '') {
+            _new['isMutipartForm'] = true;
         }
     }
     return _new;
