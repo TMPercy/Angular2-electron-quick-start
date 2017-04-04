@@ -27,8 +27,13 @@
                         </span>
                         <span class="cell send-button"> 
                             <a class="btn btn-primary btn-block" (click)='onSendingRequest($event)'>
-                                <i class="iconfont icon-fasong"></i>
-                                发送
+                                <div *ngIf="!isRequesting">
+                                    <i class="iconfont icon-fasong"></i>
+                                    发送
+                                </div>
+                                <div *ngIf="isRequesting">
+                                    中止({{requestTime}}s)
+                                </div>
                             </a>
                             <!--<eo-action-button (buttonClick)='onSendingRequest($event)' [disabled]='!enableSend' [buttonAction]=true [customerStyle]="{'min-width':'60px','text-align':'left'}" [buttonText]="'Send'" [actions]="[]" icon="glyphicon glyphicon-send" [type]="'primary'"></eo-action-button>-->
                         </span>

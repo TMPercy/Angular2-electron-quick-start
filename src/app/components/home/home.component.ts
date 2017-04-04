@@ -5,7 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { RequestMethod, Headers } from '@angular/http';
-
+import { Subscription } from "rxjs"
 /**
  * Import the ngrx configured store
  */
@@ -40,7 +40,9 @@ export class HomeComponent implements OnInit {
         this.loader = loader;
         this.res = res;
     }
-
+    httpSubscription: Subscription;
+    isRequesting: boolean = false;
+    requestTime: number = 0;
     name: string;
     defaultMethod: ActionItem = { id: 0, text: 'GET' }
     methods: ActionItem[] = [
@@ -157,6 +159,29 @@ export class HomeComponent implements OnInit {
         }
     }
     onSendingRequest() {
+        if (this.isRequesting) {
+            this.onAbortRequest();
+        }
+        else {
+            this.onRequest();
+        }
+    }
+    requestTimerTick() {
+        this.requestTime = 0;
+        let timer = setTimeout(() => {
+            if (this.isRequesting) {
+                this.requestTime++;
+            } else {
+                clearTimeout(timer);
+            }
+        }, 1000)
+    }
+    onAbortRequest() {
+        this.httpSubscription.unsubscribe();
+        this.isRequesting = false;
+    }
+
+    onRequest() {
         let headers: Headers;
         let data: any;
         let url = this.defaultProtocol.text.toLocaleLowerCase() + '://' + this.url;
@@ -164,13 +189,16 @@ export class HomeComponent implements OnInit {
         let customerHeader: any;
         let files: any;
         let isMuti: boolean;
-        //update formdate before formate
-        this.fds.updateBeforeOperate();
+
 
         if (!this.url) {
             return;
         }
-
+        this.isRequesting = true;
+        //update formdate before formate
+        this.fds.updateBeforeOperate();
+        //time tick
+        this.requestTimerTick();
 
         isMuti = this.appStore.isMutipartForm;
 
@@ -195,10 +223,9 @@ export class HomeComponent implements OnInit {
         } else {
             data = Tools.formatBodyData(this.appStore.bodyFormDatas);
         }
-        this.res.request(method, url, headers, data, files, isMuti).subscribe(
+        this.httpSubscription = this.res.request(method, url, headers, data, files, isMuti).subscribe(
             (response: any) => {
-                //call the store to update the authToken
-                console.log(response)
+
                 let status = { code: response.status, text: response.statusText };
                 let body = response._body;
                 let headers = response.headers.toJSON();
@@ -208,6 +235,7 @@ export class HomeComponent implements OnInit {
                     body: body,
                     headers: headers
                 })
+                this.isRequesting = false;
             },
             (response: any) => {
                 //call the store to update the authToken
@@ -221,8 +249,9 @@ export class HomeComponent implements OnInit {
                     body: body,
                     headers: headers
                 })
+                this.isRequesting = false;
             },
-            () => console.log('Authentication Complete')
+            () => { console.log('Authentication Complete'); this.isRequesting = false; }
         )
     }
 

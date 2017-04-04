@@ -63,6 +63,13 @@ select {
 .btn-primary {
     background-color: #2196f3;
     border-color: #2196f3;
+    &:hover,
+    &:active,
+    &:visited,
+    &:link {
+        background-color: #2196f3;
+        border-color: #2196f3;
+    }
 }
 
 // Fix for warning with electron - see https://github.com/electron/electron/issues/4420
