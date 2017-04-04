@@ -1,15 +1,15 @@
 <div class="response-pane">
     <div class="float_pane">
-        <eo-tabs [(activeTab)]="activeTab">
-            <eo-tab id="form-data" title="body">
+        <eo-tabs>
+            <eo-tab id="body" title="body">
                 <template eoTabContent>
-                    <eo-response-body></eo-response-body>
+                    <eo-response-body [value]="responseData.body" [status]="responseData.status"></eo-response-body>
                 </template>
             </eo-tab>
 
-            <eo-tab id="raw" title="header">
+            <eo-tab id="header" title="header">
                 <template eoTabContent>
-                    <eo-response-header></eo-response-header>
+                    <eo-response-header [value]="responseData.headers"></eo-response-header>
                 </template>
             </eo-tab>
         </eo-tabs>

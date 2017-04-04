@@ -25,6 +25,8 @@ declare var Notification: any;
 })
 export class RequestBodyComponent implements OnInit {
     @Input() formData: any;
+    @Input() raw: string;
+    @Input() type: string;
 
     name: string;
 
@@ -40,8 +42,6 @@ export class RequestBodyComponent implements OnInit {
     ngOnChanges(changes) {
     }
     onHeadlerFormSelect($event) {
-
-
         this.fds.updateBodyFormDataCheckStatus($event);
     }
     onHeadlerFormDelete($event) {
@@ -62,6 +62,12 @@ export class RequestBodyComponent implements OnInit {
         this.formdatas = $event;
         this.fds.updateBodyFormData(this.formdatas)
 
+    }
+    onHandlerTabChange($event) {
+        this.fds.updateBodyType($event);
+    }
+    onRawDataChange($event) {
+        this.fds.updateBodyRawData($event);
     }
 
 }

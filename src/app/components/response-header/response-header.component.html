@@ -1,7 +1,7 @@
 <div class="header">
     <ul>
-        <li>
-            Connection : <span>keep-alive</span>
+        <li *ngFor='let header of headers;'>
+            {{header.name}} : <span>{{header.value}}</span>
         </li>
 
     </ul>

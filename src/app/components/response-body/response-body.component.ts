@@ -1,7 +1,7 @@
 /**
  * Import decorators and services from angular
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 /**
  * Import the ngrx configured store
  */
@@ -18,12 +18,16 @@ declare var Notification: any;
     styleUrls: ['./response-body.component.scss'],
 })
 export class ResponseBodyComponent implements OnInit {
+    @Input() value: any;
+    @Input() status: any;
+
     name: string;
 
-    constructor(public store: Store<AppState>) { }
+    constructor(public store: Store<AppState>) {
+
+    }
 
     ngOnInit() {
-
     }
 
 }

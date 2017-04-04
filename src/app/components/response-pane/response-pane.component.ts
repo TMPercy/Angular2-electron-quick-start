@@ -1,7 +1,7 @@
 /**
  * Import decorators and services from angular
  */
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 /**
  * Import the ngrx configured store
  */
@@ -20,6 +20,8 @@ declare var Notification: any;
 
 })
 export class ResponsePaneComponent implements OnInit {
+    @Input() responseData: any;
+
     name: string;
 
     constructor(public store: Store<AppState>) { }

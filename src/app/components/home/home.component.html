@@ -49,7 +49,7 @@
 
                 <!--request header content-->
                 <div class="body body-content">
-                    <eo-request-body [formData]="appStore.bodyFormDatas"></eo-request-body>
+                    <eo-request-body [formData]="appStore.bodyFormDatas" [raw]="appStore.bodyRawData" [type]="appStore.bodyFormType"></eo-request-body>
                 </div>
             </eo-pane>
 
@@ -58,7 +58,7 @@
 
                 <!--response content-->
                 <div class="response">
-                    <eo-response-pane></eo-response-pane>
+                    <eo-response-pane [responseData]="appStore.responseData"></eo-response-pane>
                 </div>
             </eo-pane>
 

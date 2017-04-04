@@ -127,6 +127,22 @@ let tools = {
         // return _.clone(obj);
         return JSON.parse(JSON.stringify(obj));
     },
+    parseRaw: str => {
+        let result = {};
+        if (typeof str == 'string') {
+            try {
+                result = JSON.parse(str);
+                return result;
+            } catch (e) {
+                return result;
+            }
+        }
+    },
+    varifyHeader: str => {
+        let reg = /^[-a-zA-Z]+$/;
+
+        return reg.test(str);
+    }
 }
 
 export const NameSpace = tools.namespace.bind(tools);

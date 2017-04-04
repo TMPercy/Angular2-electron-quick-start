@@ -1,7 +1,8 @@
 <div class="body">
-    <div class="response-status error">
-        No response
+    <div class="response-status" [ngClass]="{'success': status.code&&status.code<=200, 'warn': status.code&&status.code>200&&status.code<400, 'error': status.code>=400||!status.code}">
+        {{status.code?status.code + ' ' +status.text:'No Response'}}
     </div>
     <div class="response-body">
+        {{value|json}}
     </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="request-body-content">
     <div class="float_pane">
-        <eo-tabs [(activeTab)]="activeTab">
-            <eo-tab id="form-data" title="表单[form-data]">
+        <eo-tabs [(activeTab)]="type" (activeTabChange)="onHandlerTabChange($event)">
+            <eo-tab id="form" title="表单[form-data]">
                 <template eoTabContent>
                     <div class="body-content">
                         <eo-form [items]='formData' (emitItemSelect)="onHeadlerFormSelect($event)" (emitItemDelete)="onHeadlerFormDelete($event)" (emitItemChange)="updateFormData($event)"  [type]="'body'"></eo-form>
@@ -15,7 +15,7 @@
 
             <eo-tab id="raw" title="源数据[raw]">
                 <template eoTabContent>
-                    <textarea class="row-content" [(ngModel)]='rawData'></textarea>    
+                    <textarea class="row-content" [ngModel]='raw' (ngModelChange)='onRawDataChange($event)'></textarea>    
                 </template>
             </eo-tab>
         </eo-tabs>

@@ -27,7 +27,6 @@ import { Tools } from '../lib/util';
     `
 })
 export class AppComponent implements OnInit {
-
     appStore: any;
 
     constructor(public store: Store<AppState>) {

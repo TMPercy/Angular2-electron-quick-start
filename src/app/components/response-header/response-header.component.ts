@@ -18,13 +18,37 @@ declare var Notification: any;
     styleUrls: ['./response-header.component.scss'],
 })
 export class ResponseHeaderComponent implements OnInit {
-    @Input() formData: any;
+    @Input() value: any;
     name: string;
+    headers: any = [];
 
     constructor(public store: Store<AppState>) { }
 
     ngOnInit() {
-
+        let item = {};
+        let result = [];
+        for (let i in this.value) {
+            if (this.value.hasOwnProperty(i)) {
+                item['name'] = i;
+                item['value'] = this.value[i][0];
+                result.push(item);
+            }
+        }
+        this.headers = result;
+    }
+    ngOnChanges(changes): void {
+        let item = {};
+        let result = [];
+        console.log(changes, 'changes')
+        for (let i in changes.value.currentValue) {
+            if (changes.value.currentValue.hasOwnProperty(i)) {
+                item['name'] = i;
+                item['value'] = changes.value.currentValue[i][0];
+                result.push(item);
+            }
+        }
+        this.headers = result;
+        console.log(this.headers)
     }
 
 }

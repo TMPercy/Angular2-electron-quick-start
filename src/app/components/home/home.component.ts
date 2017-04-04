@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         let state = this.store.select('AppStore').subscribe((state: any) => {
             this.appStore = Tools.transformPositon(state);
+            console.log(this.appStore)
         });
     }
     ngAfterViewInit() {
@@ -166,6 +167,9 @@ export class HomeComponent implements OnInit {
         //update formdate before formate
         this.fds.updateBeforeOperate();
 
+        if (!this.url) {
+            return;
+        }
 
 
         isMuti = this.appStore.isMutipartForm;
@@ -174,25 +178,50 @@ export class HomeComponent implements OnInit {
         headers.append('Accept', 'application/json');
         customerHeader = Tools.formatHeaderData(this.appStore.headerFormDatas);
         for (let property in customerHeader) {
-            if (customerHeader.hasOwnProperty(property))
+            if (customerHeader.hasOwnProperty(property) && Tools.varifyHeader(property)) {
+                if (property == 'Content-Type' && isMuti) {
+                    continue;
+                }
                 headers.append(property, customerHeader[property]);
+            }
         }
-        if (isMuti) {
+        if (!isMuti && this.appStore.bodyFormType == 'raw') {
+            data = Tools.parseRaw(this.appStore.bodyRawData);
+        }
+        else if (isMuti && this.appStore.bodyFormType == 'form') {
             let body = Tools.formatBodyFormData(this.appStore.bodyFormDatas);
             data = body.postdata;
-            console.log(body)
             files = body.files;
         } else {
             data = Tools.formatBodyData(this.appStore.bodyFormDatas);
-
         }
-        console.log(customerHeader, isMuti, Tools.formatBodyData(this.appStore.bodyFormDatas))
         this.res.request(method, url, headers, data, files, isMuti).subscribe(
-            response => {
+            (response: any) => {
                 //call the store to update the authToken
                 console.log(response)
+                let status = { code: response.status, text: response.statusText };
+                let body = response._body;
+                let headers = response.headers.toJSON();
+
+                this.fds.updateResponseData({
+                    status: status,
+                    body: body,
+                    headers: headers
+                })
             },
-            err => console.log(err),
+            (response: any) => {
+                //call the store to update the authToken
+                console.log(response)
+                let status = { code: response.status, text: response.statusText };
+                let body = response._body;
+                let headers = response.headers.toJSON();
+
+                this.fds.updateResponseData({
+                    status: status,
+                    body: body,
+                    headers: headers
+                })
+            },
             () => console.log('Authentication Complete')
         )
     }

@@ -13,7 +13,10 @@ import {
     ADD_BODY_FORMDATA,
     DELETE_BODY_FORMDATA,
     UPDATE_BODY_FORMDATA,
-    UPDATE_BODY_CHECK_STATUS
+    UPDATE_BODY_CHECK_STATUS,
+    UPDATE_BODY_TYPE,
+    UPDATE_BODY_RAWDATA,
+    UPDATE_RESPONSE_DATA
 } from '../actions';
 
 
@@ -23,6 +26,7 @@ export class FromDataControlService {
     }
     headerFormData: any;
     bodyFormData: any;
+    bodyRawData: any;
 
     toFormGroup(formdatas: any) {
         let group: any = {};
@@ -62,6 +66,14 @@ export class FromDataControlService {
                 type: UPDATE_HEADER_FORMDATA,
                 payload: {
                     payload: this.headerFormData
+                }
+            })
+        }
+        if (this.bodyRawData) {
+            this.store.dispatch({
+                type: UPDATE_BODY_RAWDATA,
+                payload: {
+                    payload: this.bodyRawData
                 }
             })
         }
@@ -122,6 +134,26 @@ export class FromDataControlService {
             }
         })
     }
+    updateBodyType(type: string) {
+        this.store.dispatch({
+            type: UPDATE_BODY_TYPE,
+            payload: {
+                payload: type
+            }
+        })
+    }
+    updateBodyRawData(payload: string) {
+        this.bodyRawData = payload;
+    }
 
 
+    updateResponseData(payload: any) {
+
+        this.store.dispatch({
+            type: UPDATE_RESPONSE_DATA,
+            payload: {
+                payload: payload
+            }
+        })
+    }
 }

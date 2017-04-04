@@ -10,5 +10,9 @@ export interface AppState {
     viewContentLoaded: boolean,
     headerFormDatas: FormDataBase<any>[][],
     bodyFormDatas: FormDataBase<any>[][],
-    isMutipartForm: boolean
+    isMutipartForm: boolean,
+    bodyFormType: string,
+    bodyRawData: string,
+    responseData: { body: any, headers: any, status: any }
+
 };

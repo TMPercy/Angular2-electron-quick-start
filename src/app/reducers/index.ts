@@ -12,7 +12,10 @@ import {
     ADD_BODY_FORMDATA,
     DELETE_BODY_FORMDATA,
     UPDATE_BODY_CHECK_STATUS,
-    UPDATE_BODY_FORMDATA
+    UPDATE_BODY_FORMDATA,
+    UPDATE_BODY_TYPE,
+    UPDATE_BODY_RAWDATA,
+    UPDATE_RESPONSE_DATA
 } from '../actions';
 
 import { DropdownItem } from '../components/form-item/form-item-dropdown';
@@ -83,7 +86,14 @@ export const InitialState = {
         ], checked: true
     }
     ],
-    isMutipartForm: false
+    isMutipartForm: false,
+    bodyFormType: 'form',
+    bodyRawData: '',
+    responseData: {
+        body: {},
+        headers: {},
+        status: { code: '', text: '' }
+    }
 };
 
 const transformLayout = (direction: string, value: number, state: any) => {
@@ -221,6 +231,26 @@ const updateBodyCheckStatus = (state: any, payload: any): any[] => {
     _new.bodyFormDatas[payload.index].checked = payload.checked;
     return _new;
 }
+const updateBodyRawData = (state: any, payload: any): any[] => {
+    let _new = Tools.copy(state);
+    _new.bodyRawData = payload;
+    return _new;
+}
+
+const updateBodyType = (state: any, payload: any): any[] => {
+    let _new = Tools.copy(state);
+    _new.bodyFormType = payload;
+    return _new;
+}
+
+const updateResponseData = (state: any, payload: any): any[] => {
+    console.log(123456)
+    let _new = Tools.copy(state);
+    _new.responseData = payload;
+    console.log(payload)
+    return _new;
+}
+
 
 export const AppStore: ActionReducer<Object> = (state: any = InitialState, action: Action) => {
     let transformObject: any;
@@ -285,6 +315,21 @@ export const AppStore: ActionReducer<Object> = (state: any = InitialState, actio
             }
         case UPDATE_BODY_CHECK_STATUS:
             _new = updateBodyCheckStatus(state, action.payload.payload)
+            return {
+                ..._new
+            }
+        case UPDATE_BODY_RAWDATA:
+            _new = updateBodyRawData(state, action.payload.payload)
+            return {
+                ..._new
+            }
+        case UPDATE_BODY_TYPE:
+            _new = updateBodyType(state, action.payload.payload)
+            return {
+                ..._new
+            }
+        case UPDATE_RESPONSE_DATA:
+            _new = updateResponseData(state, action.payload.payload)
             return {
                 ..._new
             }
